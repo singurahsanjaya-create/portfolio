@@ -4,25 +4,62 @@
     box-sizing: border-box;
 }
 
-body {
-    background-color: #eef5ff;
-    padding: 30px 10px;
-    display: flex;
-    justify-content: center;
+html {
+    scroll-behavior: smooth;
 }
 
+body {
+    background: linear-gradient(135deg, #eef5ff 0%, #dbe9fc 100%);
+    padding: 40px 15px;
+    display: flex;
+    justify-content: center;
+    overflow-x: hidden;
+}
+
+/* Indikator Progres Scroll Bar Biru di Atas */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 5px;
+    background: #2558a3;
+    width: 0%;
+    z-index: 9999;
+    transition: width 0.1s ease-out;
+}
+
+/* Kontainer Utama */
 .portfolio-container {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 40px;
     max-width: 1100px;
     width: 100%;
 }
 
+/* Gambar & Efek Animasi Scroll */
 .portfolio-container img {
     width: 100%;
     height: auto;
     display: block;
-    border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+    box-shadow: 0 12px 30px rgba(37, 88, 163, 0.12);
+    
+    /* Keadaan Awal Sebelum Di-scroll (Agak Turun & Transparan) */
+    opacity: 0;
+    transform: translateY(40px) scale(0.98);
+    transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Keadaan Setelah Gambar Masuk Layar (Muncul Halus) */
+.portfolio-container img.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Efek Interaktif Hover (Saat Kursor Diarahkan ke Gambar) */
+.portfolio-container img:hover {
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: 0 20px 40px rgba(37, 88, 163, 0.22);
+    cursor: pointer;
 }
