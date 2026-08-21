@@ -10,34 +10,65 @@
 
 <body>
 
+    <!-- Indikator Progres Scroll Bar -->
+    <div class="scroll-progress" id="progressBar"></div>
+
     <div class="portfolio-container">
         <!-- Slide 1: Cover -->
-        <img src="images/Slide%2016_9%20-%201.jpg" alt="Cover Portfolio">
+        <img src="images/Slide%2016_9%20-%201.jpg" alt="Cover Portfolio" class="animate-on-scroll">
 
         <!-- Slide 2: About Me -->
-        <img src="images/Slide%2016_9%20-%202.jpg" alt="About Me">
+        <img src="images/Slide%2016_9%20-%202.jpg" alt="About Me" class="animate-on-scroll">
 
         <!-- Slide 3: Brand Project -->
-        <img src="images/Slide%2016_9%20-%203.jpg" alt="Brand Project Kadazen">
+        <img src="images/Slide%2016_9%20-%203.jpg" alt="Brand Project Kadazen" class="animate-on-scroll">
 
         <!-- Slide 4: Table of Content -->
-        <img src="images/Slide%2016_9%20-%204.jpg" alt="Table of Content">
+        <img src="images/Slide%2016_9%20-%204.jpg" alt="Table of Content" class="animate-on-scroll">
 
         <!-- Slide 5: Poster Project -->
-        <img src="images/Slide%2016_9%20-%205.jpg" alt="Poster Project">
+        <img src="images/Slide%2016_9%20-%205.jpg" alt="Poster Project" class="animate-on-scroll">
 
         <!-- Slide 6: Digital Illustration -->
-        <img src="images/Slide%2016_9%20-%206.jpg" alt="Illustrasi Digital">
+        <img src="images/Slide%2016_9%20-%206.jpg" alt="Illustrasi Digital" class="animate-on-scroll">
 
         <!-- Slide 7: Social Media -->
-        <img src="images/Slide%2016_9%20-%207.jpg" alt="Sosial Media">
+        <img src="images/Slide%2016_9%20-%207.jpg" alt="Sosial Media" class="animate-on-scroll">
 
         <!-- Slide 8: Photography -->
-        <img src="images/Slide%2016_9%20-%208.jpg" alt="Photography">
+        <img src="images/Slide%2016_9%20-%208.jpg" alt="Photography" class="animate-on-scroll">
 
         <!-- Slide 9: Thank You -->
-        <img src="images/Slide%2016_9%20-%209.jpg" alt="Thank You">
+        <img src="images/Slide%2016_9%20-%209.jpg" alt="Thank You" class="animate-on-scroll">
     </div>
+
+    <!-- Script JavaScript untuk Efek Interaktif -->
+    <script>
+        // 1. Animasi Progres Scroll di Atas Layar
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("progressBar").style.width = scrolled + "%";
+        };
+
+        // 2. Animasi Fade-In saat Gambar Muncul di Layar
+        const observerOptions = {
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(img => {
+            observer.observe(img);
+        });
+    </script>
 
 </body>
 
