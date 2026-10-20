@@ -1,75 +1,630 @@
 <!DOCTYPE html>
-<html lang="id">
-
+<html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ngurah Sanjaya - Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Ngurah Sanjaya | Cinematic Portfolio</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Swiper.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Oswald', 'sans-serif'],
+                    },
+                    colors: {
+                        darkBg: '#080808',
+                        cardBg: '#121212',
+                        brandNeon: '#ff004f',
+                        brandNeonHover: '#cc003f',
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #080808;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Utility classes for cinematic effects */
+        .text-glow {
+            text-shadow: 0 0 15px rgba(255, 0, 79, 0.8);
+        }
+        .box-glow:hover {
+            box-shadow: 0 0 25px rgba(255, 0, 79, 0.4);
+            border-color: #ff004f;
+        }
+        .skew-title {
+            transform: skewX(-5deg);
+        }
+
+        /* Swiper Fixes */
+        .swiper-slide {
+            height: auto;
+        }
+        .coverflow-swiper .swiper-slide-active {
+            filter: drop-shadow(0 0 30px rgba(255, 0, 79, 0.5));
+        }
+        
+        /* Modal Transitions */
+        #projectModal {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        #modalContent {
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        body.modal-open {
+            overflow: hidden;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #080808;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff004f;
+        }
+    </style>
 </head>
+<body class="antialiased selection:bg-brandNeon selection:text-white">
 
-<body>
+    <!-- 1. Navbar -->
+    <nav id="navbar" class="fixed w-full z-50 top-0 transition-all duration-300 bg-gradient-to-b from-black/90 to-transparent pt-6 pb-6 px-6 md:px-12 flex items-center justify-between">
+        <a href="#hero" class="text-3xl md:text-4xl font-display font-bold tracking-widest text-brandNeon text-glow">
+            SANJAYA
+        </a>
+        
+        <!-- Desktop Nav -->
+        <div class="hidden md:flex items-center space-x-8">
+            <a href="#hero" class="text-white hover:text-brandNeon font-medium text-sm transition-colors">Home</a>
+            <a href="#about" class="text-gray-400 hover:text-white font-medium text-sm transition-colors">About</a>
+            <a href="#experience" class="text-gray-400 hover:text-white font-medium text-sm transition-colors">Experience</a>
+            <a href="#projects" class="text-gray-400 hover:text-white font-medium text-sm transition-colors">Projects</a>
+        </div>
 
-    <!-- Indikator Progres Scroll Bar -->
-    <div class="scroll-progress" id="progressBar"></div>
+        <div class="flex items-center gap-4">
+            <button class="text-gray-300 hover:text-brandNeon transition-colors" aria-label="Search">
+                <i class="ph-bold ph-magnifying-glass text-2xl"></i>
+            </button>
+            <a href="#cta" class="hidden md:flex items-center gap-2 border border-brandNeon/50 text-brandNeon hover:bg-brandNeon hover:text-white px-4 py-2 rounded-full text-sm font-bold transition-all box-glow">
+                CONTACT
+            </a>
+            <!-- Mobile Menu Icon -->
+            <button class="md:hidden text-gray-300 hover:text-brandNeon">
+                <i class="ph-bold ph-list text-2xl"></i>
+            </button>
+        </div>
+    </nav>
 
-    <div class="portfolio-container">
-        <!-- Slide 1: Cover -->
-        <img src="images/Slide%2016_9%20-%201.jpg" alt="Cover Portfolio" class="animate-on-scroll">
+    <!-- 2. Hero Section -->
+    <section id="hero" class="relative h-screen w-full flex items-center overflow-hidden">
+        <!-- Background Image (Cyberpunk/Dark setup) -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=2564&auto=format&fit=crop" alt="Hero Background" class="w-full h-full object-cover opacity-40">
+            <div class="absolute inset-0 bg-gradient-to-r from-darkBg via-darkBg/80 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-darkBg via-transparent to-transparent"></div>
+        </div>
 
-        <!-- Slide 2: About Me -->
-        <img src="images/Slide%2016_9%20-%202.jpg" alt="About Me" class="animate-on-scroll">
+        <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full mt-20">
+            <div class="max-w-3xl">
+                <!-- Tagline/Rating -->
+                <div class="flex items-center gap-3 text-xs md:text-sm font-medium text-gray-300 mb-6 flex-wrap">
+                    <span class="bg-gray-800 text-white px-2 py-1 rounded border border-gray-600 flex items-center gap-1 font-bold">
+                        13+
+                    </span>
+                    <span>2026</span>
+                    <span class="text-gray-600">|</span>
+                    <span>UI/UX & Graphic Design</span>
+                    <span class="text-gray-600">|</span>
+                    <span>Illustrator</span>
+                    <span class="text-gray-600">|</span>
+                    <span class="flex items-center gap-1 text-brandNeon"><i class="ph-fill ph-map-pin"></i> Bali, ID</span>
+                </div>
 
-        <!-- Slide 3: Brand Project -->
-        <img src="images/Slide%2016_9%20-%203.jpg" alt="Brand Project Kadazen" class="animate-on-scroll">
+                <!-- Main Title -->
+                <h1 class="text-6xl md:text-8xl lg:text-[100px] font-display font-bold uppercase tracking-tight leading-[0.9] mb-6 skew-title">
+                    Ngurah <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-gray-600">
+                        Sanjaya
+                    </span>
+                </h1>
+                
+                <p class="text-base md:text-lg text-gray-400 mb-10 max-w-xl leading-relaxed">
+                    Graphic Designer, UI/UX Designer, Digital Illustrator, & Photographer. Merangkai cerita melalui elemen visual yang sinematik, modern, dan fungsional.
+                </p>
 
-        <!-- Slide 4: Table of Content -->
-        <img src="images/Slide%2016_9%20-%204.jpg" alt="Table of Content" class="animate-on-scroll">
+                <!-- Action Buttons -->
+                <div class="flex items-center gap-4">
+                    <button onclick="openModal('hire')" class="bg-brandNeon hover:bg-brandNeonHover text-white px-8 py-3.5 rounded-full font-bold flex items-center gap-3 transition-all shadow-[0_0_20px_rgba(255,0,79,0.5)] hover:scale-105 active:scale-95 uppercase tracking-wider text-sm md:text-base">
+                        HIRE ME
+                        <i class="ph-bold ph-lightning text-xl"></i>
+                    </button>
+                    <a href="#projects" class="px-8 py-3.5 rounded-full font-bold flex items-center gap-3 transition-all border-2 border-white/30 hover:border-white hover:bg-white/10 uppercase tracking-wider text-sm md:text-base text-white">
+                        PLAY PORTFOLIO
+                        <i class="ph-fill ph-play-circle text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <!-- Slide 5: Poster Project -->
-        <img src="images/Slide%2016_9%20-%205.jpg" alt="Poster Project" class="animate-on-scroll">
+    <!-- 3. About Section -->
+    <section id="about" class="py-24 relative bg-darkBg">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <!-- Left: Profile Image -->
+            <div class="relative group">
+                <div class="absolute inset-0 bg-brandNeon rounded-2xl blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-500"></div>
+                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop" alt="Profile Workspace" class="relative z-10 w-full rounded-2xl border border-white/10 grayscale-[50%] group-hover:grayscale-0 transition-all duration-500 shadow-2xl">
+                <!-- Floating Badge -->
+                <div class="absolute -bottom-6 -right-6 z-20 bg-cardBg border border-brandNeon/50 p-4 rounded-xl shadow-[0_0_15px_rgba(255,0,79,0.3)] backdrop-blur-md">
+                    <p class="font-display text-2xl font-bold text-white">DKV</p>
+                    <p class="text-xs text-brandNeon font-medium uppercase tracking-widest">Student</p>
+                </div>
+            </div>
 
-        <!-- Slide 6: Digital Illustration -->
-        <img src="images/Slide%2016_9%20-%206.jpg" alt="Illustrasi Digital" class="animate-on-scroll">
+            <!-- Right: Text Content -->
+            <div>
+                <h2 class="text-brandNeon font-display tracking-widest uppercase text-sm font-bold mb-3 flex items-center gap-2">
+                    <span class="w-8 h-[2px] bg-brandNeon"></span> Behind The Scenes
+                </h2>
+                <h3 class="text-4xl md:text-5xl font-display font-bold text-white mb-6 uppercase skew-title">About Me</h3>
+                <p class="text-gray-400 leading-relaxed mb-6 text-lg">
+                    Saya adalah seorang siswa <span class="text-white font-medium">Desain Komunikasi Visual (DKV) di SMK TI Bali Global Badung</span>. Berbasis di Bali, Indonesia, saya memiliki minat besar dan fokus mendalam pada eksplorasi desain web (UI/UX), ilustrasi digital, serta membangun sistem desain yang solid.
+                </p>
+                <p class="text-gray-400 leading-relaxed mb-8 text-lg">
+                    Memadukan estetika visual dengan fungsionalitas adalah tujuan utama dalam setiap karya yang saya hasilkan. Saya percaya desain bukan hanya soal tampilan, tapi bagaimana visual bisa berkomunikasi secara efektif.
+                </p>
 
-        <!-- Slide 7: Social Media -->
-        <img src="images/Slide%2016_9%20-%207.jpg" alt="Sosial Media" class="animate-on-scroll">
+                <!-- Stats/Skills -->
+                <div class="grid grid-cols-2 gap-6 pt-6 border-t border-white/10">
+                    <div>
+                        <h4 class="text-white font-bold text-lg mb-1">UI/UX Design</h4>
+                        <p class="text-gray-500 text-sm">Figma, Wireframing, Prototyping</p>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-bold text-lg mb-1">Illustration</h4>
+                        <p class="text-gray-500 text-sm">Digital Art, Character Design</p>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-bold text-lg mb-1">Graphic Design</h4>
+                        <p class="text-gray-500 text-sm">Branding, Posters, Layouting</p>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-bold text-lg mb-1">Photography</h4>
+                        <p class="text-gray-500 text-sm">Documentation, Retouching</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <!-- Slide 8: Photography -->
-        <img src="images/Slide%2016_9%20-%208.jpg" alt="Photography" class="animate-on-scroll">
+    <!-- 4. Experience Section (Actor List Style) -->
+    <section id="experience" class="py-24 bg-[#0a0a0a] relative overflow-hidden">
+        <!-- Top Gradient -->
+        <div class="absolute top-0 w-full h-px bg-gradient-to-r from-transparent via-brandNeon/50 to-transparent"></div>
 
-        <!-- Slide 9: Thank You -->
-        <img src="images/Slide%2016_9%20-%209.jpg" alt="Thank You" class="animate-on-scroll">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="flex items-end justify-between mb-10 border-b border-white/10 pb-6">
+                <div>
+                    <h2 class="text-4xl md:text-5xl font-display font-bold text-white uppercase skew-title">Experience</h2>
+                    <p class="text-gray-500 mt-2 text-sm uppercase tracking-widest">Perjalanan & Kolaborasi</p>
+                </div>
+                <!-- Swiper Navigation -->
+                <div class="flex gap-2">
+                    <button class="exp-prev w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:border-brandNeon hover:text-brandNeon transition-colors text-white">
+                        <i class="ph-bold ph-arrow-left"></i>
+                    </button>
+                    <button class="exp-next w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:border-brandNeon hover:text-brandNeon transition-colors text-white">
+                        <i class="ph-bold ph-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Swiper Container -->
+            <div class="swiper exp-swiper overflow-visible">
+                <div class="swiper-wrapper">
+                    <!-- Exp 1 -->
+                    <div class="swiper-slide !w-[280px] md:!w-[320px]">
+                        <div class="bg-cardBg p-6 rounded-2xl border border-white/5 hover:border-brandNeon/50 transition-colors group h-full">
+                            <div class="w-16 h-16 rounded-full bg-brandNeon/10 text-brandNeon flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                                <i class="ph-fill ph-laptop text-3xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2 font-display">Freelance Designer</h3>
+                            <p class="text-gray-400 text-sm">Mengerjakan berbagai proyek desain grafis, mulai dari poster, identitas merek, hingga materi promosi untuk klien.</p>
+                        </div>
+                    </div>
+                    <!-- Exp 2 -->
+                    <div class="swiper-slide !w-[280px] md:!w-[320px]">
+                        <div class="bg-cardBg p-6 rounded-2xl border border-white/5 hover:border-brandNeon/50 transition-colors group h-full">
+                            <div class="w-16 h-16 rounded-full bg-brandNeon/10 text-brandNeon flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                                <i class="ph-fill ph-pen-nib text-3xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2 font-display">PKL UI/UX</h3>
+                            <p class="text-gray-400 text-sm">Praktek Kerja Lapangan dengan fokus pada User Interface dan User Experience. Membangun wireframe dan hi-fi prototype.</p>
+                        </div>
+                    </div>
+                    <!-- Exp 3 -->
+                    <div class="swiper-slide !w-[280px] md:!w-[320px]">
+                        <div class="bg-cardBg p-6 rounded-2xl border border-white/5 hover:border-brandNeon/50 transition-colors group h-full">
+                            <div class="w-16 h-16 rounded-full bg-brandNeon/10 text-brandNeon flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                                <i class="ph-fill ph-palette text-3xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2 font-display">Featured Artist</h3>
+                            <p class="text-brandNeon text-xs font-bold uppercase tracking-wider mb-2">Bhuwana Virchita Mandala</p>
+                            <p class="text-gray-400 text-sm">Terpilih sebagai seniman yang karyanya dipamerkan, menampilkan eksplorasi seni visual kontemporer.</p>
+                        </div>
+                    </div>
+                    <!-- Exp 4 -->
+                    <div class="swiper-slide !w-[280px] md:!w-[320px]">
+                        <div class="bg-cardBg p-6 rounded-2xl border border-white/5 hover:border-brandNeon/50 transition-colors group h-full">
+                            <div class="w-16 h-16 rounded-full bg-brandNeon/10 text-brandNeon flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                                <i class="ph-fill ph-camera text-3xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2 font-display">Dokumentasi</h3>
+                            <p class="text-brandNeon text-xs font-bold uppercase tracking-wider mb-2">Hunting Sakti 4</p>
+                            <p class="text-gray-400 text-sm">Bertanggung jawab atas fotografi dan dokumentasi acara, menangkap momen-momen krusial dengan gaya sinematik.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Projects Section (Selected Films 3D Style) -->
+    <section id="projects" class="py-24 relative overflow-hidden bg-gradient-to-b from-[#0a0a0a] to-darkBg">
+        <!-- Radial Glow Background -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-brandNeon/10 rounded-full blur-[150px] pointer-events-none"></div>
+
+        <div class="text-center mb-12 relative z-10">
+            <span class="bg-brandNeon text-white px-6 py-2 rounded-full text-sm font-bold tracking-widest uppercase shadow-[0_0_20px_rgba(255,0,79,0.4)]">
+                Selected Works
+            </span>
+            <h2 class="text-3xl md:text-5xl font-display font-bold text-white uppercase skew-title mt-8">
+                Featured Projects
+            </h2>
+        </div>
+
+        <div class="w-full relative z-10">
+            <!-- 3D Coverflow Swiper -->
+            <div class="swiper projects-swiper pb-16 pt-4">
+                <div class="swiper-wrapper">
+                    
+                    <!-- Project 1: Kadazen -->
+                    <div class="swiper-slide !w-[280px] md:!w-[380px]">
+                        <div onclick="openModal('kadazen')" class="aspect-[3/4] rounded-2xl overflow-hidden border-2 border-transparent box-glow bg-cardBg relative group cursor-pointer shadow-2xl transition-all duration-300">
+                            <!-- Placeholder image representing branding -->
+                            <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="KADAZEN">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+                            
+                            <!-- Hover Play Button -->
+                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <div class="w-20 h-20 bg-brandNeon/90 rounded-full flex items-center justify-center text-white shadow-[0_0_30px_rgba(255,0,79,1)] scale-75 group-hover:scale-100 transition-all duration-300 backdrop-blur-sm">
+                                    <i class="ph-fill ph-play text-3xl ml-2"></i>
+                                </div>
+                            </div>
+
+                            <div class="absolute bottom-0 left-0 w-full p-6 translate-y-2 group-hover:translate-y-0 transition-transform">
+                                <span class="text-brandNeon text-xs font-bold uppercase tracking-wider mb-1 block text-glow">Branding</span>
+                                <h3 class="text-2xl md:text-3xl font-display font-bold text-white mb-2 leading-none uppercase">KADAZEN</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2: Lahilote -->
+                    <div class="swiper-slide !w-[280px] md:!w-[380px]">
+                        <div onclick="openModal('lahilote')" class="aspect-[3/4] rounded-2xl overflow-hidden border-2 border-transparent box-glow bg-cardBg relative group cursor-pointer shadow-2xl transition-all duration-300">
+                            <!-- Placeholder image representing animation/story -->
+                            <img src="https://images.unsplash.com/photo-1618519764620-7403abdbdf9c?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Lahilote">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+                            
+                            <!-- Hover Play Button -->
+                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <div class="w-20 h-20 bg-brandNeon/90 rounded-full flex items-center justify-center text-white shadow-[0_0_30px_rgba(255,0,79,1)] scale-75 group-hover:scale-100 transition-all duration-300 backdrop-blur-sm">
+                                    <i class="ph-fill ph-play text-3xl ml-2"></i>
+                                </div>
+                            </div>
+
+                            <div class="absolute bottom-0 left-0 w-full p-6 translate-y-2 group-hover:translate-y-0 transition-transform">
+                                <span class="text-brandNeon text-xs font-bold uppercase tracking-wider mb-1 block text-glow">Animasi</span>
+                                <h3 class="text-2xl md:text-3xl font-display font-bold text-white mb-2 leading-none uppercase">Lahilote</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3: Fatamorgana -->
+                    <div class="swiper-slide !w-[280px] md:!w-[380px]">
+                        <div onclick="openModal('fatamorgana')" class="aspect-[3/4] rounded-2xl overflow-hidden border-2 border-transparent box-glow bg-cardBg relative group cursor-pointer shadow-2xl transition-all duration-300">
+                            <!-- Placeholder image representing digital illustration -->
+                            <img src="https://images.unsplash.com/photo-1558865869-c93f6f8482af?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Fatamorgana">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+                            
+                            <!-- Hover Play Button -->
+                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <div class="w-20 h-20 bg-brandNeon/90 rounded-full flex items-center justify-center text-white shadow-[0_0_30px_rgba(255,0,79,1)] scale-75 group-hover:scale-100 transition-all duration-300 backdrop-blur-sm">
+                                    <i class="ph-fill ph-play text-3xl ml-2"></i>
+                                </div>
+                            </div>
+
+                            <div class="absolute bottom-0 left-0 w-full p-6 translate-y-2 group-hover:translate-y-0 transition-transform">
+                                <span class="text-brandNeon text-xs font-bold uppercase tracking-wider mb-1 block text-glow">Ilustrasi Digital</span>
+                                <h3 class="text-2xl md:text-3xl font-display font-bold text-white mb-2 leading-none uppercase">Fatamorgana <br>di Tengah Lara</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- Pagination -->
+                <div class="swiper-pagination !bottom-0"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Call to Action (CTA) -->
+    <section id="cta" class="py-24 relative overflow-hidden">
+        <!-- Deep Red Gradient Background -->
+        <div class="absolute inset-0 bg-gradient-to-br from-red-950 via-[#2a000a] to-darkBg z-0"></div>
+        <!-- Grid pattern overlay -->
+        <div class="absolute inset-0 z-0 opacity-10" style="background-image: linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px); background-size: 40px 40px;"></div>
+
+        <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
+            <i class="ph-fill ph-film-strip text-6xl text-brandNeon mb-6 animate-pulse-slow"></i>
+            <h2 class="text-5xl md:text-7xl font-display font-bold text-white uppercase mb-6 skew-title text-glow">
+                Mari Berkolaborasi!
+            </h2>
+            <p class="text-gray-300 text-lg md:text-xl mb-12 max-w-2xl mx-auto">
+                Punya ide brilian atau proyek menantang? Mari wujudkan visi Anda menjadi karya visual yang luar biasa bersama saya.
+            </p>
+            
+            <div class="flex flex-col md:flex-row items-center justify-center gap-6">
+                <!-- Email Button -->
+                <a href="mailto:singurahsanjaya@gmail.com" class="w-full md:w-auto bg-white text-black hover:bg-gray-200 px-8 py-4 rounded-full font-bold flex items-center justify-center gap-3 transition-colors uppercase tracking-wider">
+                    <i class="ph-bold ph-envelope-simple text-xl"></i>
+                    singurahsanjaya@gmail.com
+                </a>
+                <!-- WA Button -->
+                <a href="https://wa.me/6285737116564" target="_blank" class="w-full md:w-auto bg-[#25D366] hover:bg-[#20b858] text-white px-8 py-4 rounded-full font-bold flex items-center justify-center gap-3 transition-colors shadow-[0_0_20px_rgba(37,211,102,0.4)] uppercase tracking-wider">
+                    <i class="ph-bold ph-whatsapp-logo text-xl"></i>
+                    WhatsApp Me
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Footer -->
+    <footer class="bg-black py-8 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-4">
+            <p class="text-gray-500 text-sm font-medium">
+                &copy; 2026 Ngurah Sanjaya. All rights reserved.
+            </p>
+            <div class="flex items-center gap-6 text-gray-500">
+                <a href="#" class="hover:text-brandNeon transition-colors flex items-center gap-2 text-sm font-bold uppercase">
+                    <i class="ph-fill ph-instagram-logo text-xl"></i> Instagram
+                </a>
+                <a href="#" class="hover:text-brandNeon transition-colors flex items-center gap-2 text-sm font-bold uppercase">
+                    <i class="ph-fill ph-behance-logo text-xl"></i> Behance
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 8. Interactive Project Modal -->
+    <div id="projectModal" class="fixed inset-0 z-[100] flex items-center justify-center opacity-0 invisible bg-black/90 backdrop-blur-lg px-4 md:px-12 pt-16 md:pt-0">
+        
+        <!-- Modal Content Container -->
+        <div id="modalContent" class="bg-cardBg border border-white/10 rounded-2xl w-full max-w-5xl max-h-[85vh] overflow-y-auto flex flex-col md:flex-row shadow-[0_0_60px_rgba(255,0,79,0.2)] transform scale-95 relative hide-scrollbar">
+            
+            <!-- Close Button -->
+            <button onclick="closeModal()" class="absolute top-4 right-4 z-20 w-10 h-10 bg-black/60 hover:bg-brandNeon rounded-full flex items-center justify-center text-white transition-colors border border-white/20">
+                <i class="ph-bold ph-x text-lg"></i>
+            </button>
+
+            <!-- Left: Image/Video Area -->
+            <div class="w-full md:w-1/2 h-64 md:h-auto relative bg-black">
+                <img id="modalImg" src="" alt="Project Cover" class="w-full h-full object-cover">
+                <!-- Overlay Gradients -->
+                <div class="absolute inset-0 bg-gradient-to-t from-cardBg via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:to-cardBg"></div>
+                <!-- Play Button Center -->
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="w-16 h-16 border-2 border-white/50 rounded-full flex items-center justify-center bg-black/30 backdrop-blur-sm hover:scale-110 transition-transform cursor-pointer hover:border-brandNeon">
+                        <i class="ph-fill ph-play text-2xl text-white ml-1"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Details Area -->
+            <div class="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center bg-cardBg">
+                <div class="flex items-center gap-3 mb-4">
+                    <span id="modalCategory" class="text-brandNeon text-xs font-bold tracking-widest uppercase border border-brandNeon/30 px-3 py-1 rounded-sm bg-brandNeon/10">Kategori</span>
+                    <span class="text-gray-500 text-sm font-medium">|</span>
+                    <span id="modalYear" class="text-gray-400 text-sm font-medium border border-gray-600 px-2 py-0.5 rounded">2026</span>
+                </div>
+                
+                <h2 id="modalTitle" class="text-3xl md:text-5xl font-display font-bold text-white mb-6 uppercase leading-tight skew-title origin-left">
+                    Judul Proyek
+                </h2>
+                
+                <p id="modalDesc" class="text-gray-300 text-base leading-relaxed mb-8 font-light">
+                    Deskripsi detail mengenai proyek ini akan muncul di sini.
+                </p>
+
+                <!-- Tools/Tags (Static for design purposes) -->
+                <div class="mb-8">
+                    <h4 class="text-white font-bold text-sm mb-3">Tools Used:</h4>
+                    <div class="flex gap-2 flex-wrap">
+                        <span class="bg-white/5 border border-white/10 px-3 py-1 rounded text-xs text-gray-300">Adobe Illustrator</span>
+                        <span class="bg-white/5 border border-white/10 px-3 py-1 rounded text-xs text-gray-300">Figma</span>
+                        <span class="bg-white/5 border border-white/10 px-3 py-1 rounded text-xs text-gray-300">Photoshop</span>
+                    </div>
+                </div>
+
+                <!-- Modal Actions -->
+                <div class="mt-auto flex items-center gap-4">
+                    <button class="flex-1 bg-white hover:bg-gray-200 text-black font-bold py-3 md:py-4 rounded text-center transition-colors flex justify-center items-center gap-2 uppercase tracking-wide text-sm">
+                        <i class="ph-bold ph-eye text-lg"></i> View Full Case
+                    </button>
+                    <button class="w-12 h-12 md:w-14 md:h-14 rounded border border-white/20 flex items-center justify-center hover:bg-white/10 transition-colors text-white">
+                        <i class="ph-bold ph-plus text-xl"></i>
+                    </button>
+                    <button class="w-12 h-12 md:w-14 md:h-14 rounded border border-white/20 flex items-center justify-center hover:bg-white/10 transition-colors text-white">
+                        <i class="ph-bold ph-share-network text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Script JavaScript untuk Efek Interaktif -->
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        // 1. Animasi Progres Scroll di Atas Layar
-        window.onscroll = function() {
-            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            let scrolled = (winScroll / height) * 100;
-            document.getElementById("progressBar").style.width = scrolled + "%";
+        // 1. Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-black', 'border-b', 'border-white/10', 'py-4');
+                navbar.classList.remove('bg-gradient-to-b', 'from-black/90', 'to-transparent', 'pt-6', 'pb-6');
+            } else {
+                navbar.classList.remove('bg-black', 'border-b', 'border-white/10', 'py-4');
+                navbar.classList.add('bg-gradient-to-b', 'from-black/90', 'to-transparent', 'pt-6', 'pb-6');
+            }
+        });
+
+        // 2. Initialize Swiper for Experience (Horizontal List)
+        const expSwiper = new Swiper('.exp-swiper', {
+            slidesPerView: 'auto',
+            spaceBetween: 24,
+            freeMode: true,
+            grabCursor: true,
+            navigation: {
+                nextEl: '.exp-next',
+                prevEl: '.exp-prev',
+            },
+        });
+
+        // 3. Initialize Swiper for Projects (3D Coverflow)
+        const projectsSwiper = new Swiper('.projects-swiper', {
+            effect: 'coverflow',
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: 'auto',
+            initialSlide: 1, // Start on middle slide
+            coverflowEffect: {
+                rotate: 0,      // No rotation, flat facing forward
+                stretch: 0,     // Space between
+                depth: 300,     // Depth effect
+                modifier: 1,    
+                slideShadows: true,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+
+        // 4. Modal Database
+        const projectData = {
+            'hire': {
+                title: 'Let\'s Create Something Epic',
+                category: 'Collaboration',
+                year: '2026',
+                img: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1000&auto=format&fit=crop',
+                desc: 'Saya siap membantu mewujudkan visi Anda. Baik itu merancang antarmuka aplikasi yang intuitif (UI/UX), membuat identitas merek yang kuat (Branding), atau menciptakan ilustrasi digital yang memukau. Hubungi saya melalui tombol WhatsApp atau Email di halaman ini.'
+            },
+            'kadazen': {
+                title: 'Brand KADAZEN',
+                category: 'Branding Project',
+                year: '2025',
+                img: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=1000&auto=format&fit=crop',
+                desc: 'Pengembangan identitas visual menyeluruh untuk brand KADAZEN. Proyek ini mencakup perancangan logo, tipografi, palet warna, hingga pedoman visual (brand guidelines) untuk memastikan konsistensi merek di berbagai platform.'
+            },
+            'lahilote': {
+                title: 'Animasi Lahilote',
+                category: 'Animation & Story',
+                year: '2026',
+                img: 'https://images.unsplash.com/photo-1618519764620-7403abdbdf9c?q=80&w=1000&auto=format&fit=crop',
+                desc: 'Proyek animasi yang mengangkat cerita rakyat lokal dengan sentuhan gaya visual modern. Bertanggung jawab dalam pembuatan storyboard, desain karakter, dan arahan visual sinematik untuk menciptakan pengalaman menonton yang imersif.'
+            },
+            'fatamorgana': {
+                title: 'Fatamorgana di Tengah Lara',
+                category: 'Digital Illustration',
+                year: '2024',
+                img: 'https://images.unsplash.com/photo-1558865869-c93f6f8482af?q=80&w=1000&auto=format&fit=crop',
+                desc: 'Sebuah eksplorasi ilustrasi digital yang mendalam tentang emosi manusia. Menggunakan permainan cahaya dramatis dan warna kontras untuk menggambarkan kebingungan dan harapan di tengah situasi yang sulit.'
+            }
         };
 
-        // 2. Animasi Fade-In saat Gambar Muncul di Layar
-        const observerOptions = {
-            threshold: 0.15
-        };
+        // 5. Modal Control Logic
+        const modal = document.getElementById('projectModal');
+        const modalContent = document.getElementById('modalContent');
+        const body = document.body;
 
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
+        function openModal(id) {
+            const data = projectData[id];
+            if (!data) return;
 
-        document.querySelectorAll('.animate-on-scroll').forEach(img => {
-            observer.observe(img);
+            // Inject Data
+            document.getElementById('modalTitle').innerText = data.title;
+            document.getElementById('modalCategory').innerText = data.category;
+            document.getElementById('modalYear').innerText = data.year;
+            document.getElementById('modalDesc').innerText = data.desc;
+            document.getElementById('modalImg').src = data.img;
+
+            // Show UI
+            modal.classList.remove('invisible', 'opacity-0');
+            modalContent.classList.remove('scale-95');
+            modalContent.classList.add('scale-100');
+            body.classList.add('modal-open');
+        }
+
+        function closeModal() {
+            // Hide UI
+            modal.classList.add('opacity-0');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+            body.classList.remove('modal-open');
+            
+            setTimeout(() => {
+                modal.classList.add('invisible');
+            }, 300); // Matches transition duration
+        }
+
+        // Close on background click
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) closeModal();
+        });
+        
+        // Close on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && !modal.classList.contains('invisible')) {
+                closeModal();
+            }
         });
     </script>
-
 </body>
-
 </html>
