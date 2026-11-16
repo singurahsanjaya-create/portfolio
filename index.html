@@ -140,32 +140,67 @@
 
     <!-- Top Navigation Bar -->
     <header class="fixed top-0 left-0 right-0 z-40 transition-all duration-300" id="navbar">
-        <nav class="max-w-5xl mx-auto px-4 pt-6 pb-4 flex flex-wrap items-center justify-center gap-5 sm:gap-9 text-xs sm:text-sm font-display tracking-wider">
-            <a href="#home" data-nav="home" class="nav-link relative py-1 text-white font-bold transition-opacity hover:opacity-100">
-                Home
-                <span class="nav-indicator absolute bottom-0 left-0 right-0 h-[2.5px] bg-white rounded-full transition-all duration-300"></span>
+        <nav class="max-w-6xl mx-auto px-4 pt-5 pb-4 flex items-center justify-between">
+            <!-- Brand Monogram -->
+            <a href="#home" class="font-display font-black text-base sm:text-lg tracking-wider text-white flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-blue-500 shadow-[0_0_10px_#0088ff]"></span>
+                <span>FORTFOLIO<span class="text-blue-400">.</span></span>
             </a>
-            <a href="#profile" data-nav="profile" class="nav-link relative py-1 text-white/75 hover:text-white transition-all">
-                Profile
-                <span class="nav-indicator absolute bottom-0 left-0 right-0 h-[2.5px] bg-white rounded-full scale-x-0 transition-all duration-300"></span>
-            </a>
-            <a href="#about" data-nav="about" class="nav-link relative py-1 text-white/75 hover:text-white transition-all">
-                About Me
-                <span class="nav-indicator absolute bottom-0 left-0 right-0 h-[2.5px] bg-white rounded-full scale-x-0 transition-all duration-300"></span>
-            </a>
-            <a href="#project" data-nav="project" class="nav-link relative py-1 text-white/75 hover:text-white transition-all">
-                Project
-                <span class="nav-indicator absolute bottom-0 left-0 right-0 h-[2.5px] bg-white rounded-full scale-x-0 transition-all duration-300"></span>
-            </a>
-            <a href="#gallery" data-nav="gallery" class="nav-link relative py-1 text-white/75 hover:text-white transition-all">
-                Social gallery
-                <span class="nav-indicator absolute bottom-0 left-0 right-0 h-[2.5px] bg-white rounded-full scale-x-0 transition-all duration-300"></span>
-            </a>
-            <a href="#contact" data-nav="contact" class="nav-link relative py-1 text-white/75 hover:text-white transition-all">
-                Contact
-                <span class="nav-indicator absolute bottom-0 left-0 right-0 h-[2.5px] bg-white rounded-full scale-x-0 transition-all duration-300"></span>
-            </a>
+
+            <!-- Desktop Menu Links -->
+            <div class="hidden md:flex items-center gap-7 text-xs font-display tracking-wider">
+                <a href="#home" data-nav="home" class="nav-link relative py-1 text-white font-bold transition-opacity hover:opacity-100">
+                    Home
+                    <span class="nav-indicator absolute bottom-0 left-0 right-0 h-[2.5px] bg-white rounded-full transition-all duration-300"></span>
+                </a>
+                <a href="#profile" data-nav="profile" class="nav-link relative py-1 text-white/75 hover:text-white transition-all">
+                    Profile
+                    <span class="nav-indicator absolute bottom-0 left-0 right-0 h-[2.5px] bg-white rounded-full scale-x-0 transition-all duration-300"></span>
+                </a>
+                <a href="#experience" data-nav="experience" class="nav-link relative py-1 text-white/75 hover:text-white transition-all">
+                    Experience
+                    <span class="nav-indicator absolute bottom-0 left-0 right-0 h-[2.5px] bg-white rounded-full scale-x-0 transition-all duration-300"></span>
+                </a>
+                <a href="#services" data-nav="services" class="nav-link relative py-1 text-white/75 hover:text-white transition-all">
+                    Services
+                    <span class="nav-indicator absolute bottom-0 left-0 right-0 h-[2.5px] bg-white rounded-full scale-x-0 transition-all duration-300"></span>
+                </a>
+                <a href="#project" data-nav="project" class="nav-link relative py-1 text-white/75 hover:text-white transition-all">
+                    Project
+                    <span class="nav-indicator absolute bottom-0 left-0 right-0 h-[2.5px] bg-white rounded-full scale-x-0 transition-all duration-300"></span>
+                </a>
+                <a href="#gallery" data-nav="gallery" class="nav-link relative py-1 text-white/75 hover:text-white transition-all">
+                    Gallery
+                    <span class="nav-indicator absolute bottom-0 left-0 right-0 h-[2.5px] bg-white rounded-full scale-x-0 transition-all duration-300"></span>
+                </a>
+                <a href="#contact" data-nav="contact" class="nav-link relative py-1 text-white/75 hover:text-white transition-all">
+                    Contact
+                    <span class="nav-indicator absolute bottom-0 left-0 right-0 h-[2.5px] bg-white rounded-full scale-x-0 transition-all duration-300"></span>
+                </a>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center gap-2.5">
+                <button onclick="toggleResumeModal(true)" class="px-3.5 py-2 rounded-full glass-panel hover:border-blue-400 text-[11px] font-display font-semibold text-white transition-all flex items-center gap-1.5">
+                    <span>📄</span>
+                    <span>Resume / CV</span>
+                </button>
+                <button onclick="toggleMobileMenu()" class="md:hidden w-9 h-9 rounded-full glass-panel flex items-center justify-center text-white text-sm" aria-label="Menu">
+                    ☰
+                </button>
+            </div>
         </nav>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden mx-4 mt-1 p-4 rounded-2xl glass-panel border border-white/15 flex-col gap-3 text-xs font-display">
+            <a href="#home" onclick="toggleMobileMenu()" class="py-1.5 text-white">Home</a>
+            <a href="#profile" onclick="toggleMobileMenu()" class="py-1.5 text-white/80">Profile & Skills</a>
+            <a href="#experience" onclick="toggleMobileMenu()" class="py-1.5 text-white/80">Experience</a>
+            <a href="#services" onclick="toggleMobileMenu()" class="py-1.5 text-white/80">Services & Workflow</a>
+            <a href="#project" onclick="toggleMobileMenu()" class="py-1.5 text-white/80">Projects</a>
+            <a href="#gallery" onclick="toggleMobileMenu()" class="py-1.5 text-white/80">Social Gallery</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="py-1.5 text-blue-400 font-bold">Contact Me</a>
+        </div>
     </header>
 
     <!-- =====================================================================
@@ -447,67 +482,88 @@
                         <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
                         AVAILABLE FOR CREATIVE WORK
                     </div>
-                    <h2 class="font-display text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">
+                    <h2 class="font-display text-3xl sm:text-4xl font-extrabold tracking-tight mb-1">
                         Raka Pratama
                     </h2>
+                    <p class="text-xs font-display text-blue-400 tracking-wider mb-4">SENIOR MULTIDISCIPLINARY VISUAL & UI/UX DESIGNER • BANDUNG, ID</p>
                     <p class="text-white/70 text-sm sm:text-base leading-relaxed mb-6">
-                        Visual Designer, UI/UX Crafter, & Motion Editor. Menggabungkan estetika kontras tinggi, tipografi futuristik, dan elemen 3D interaktif menjadi pengalaman digital yang berkesan.
+                        Visual Designer, UI/UX Crafter, & Motion Editor. Menggabungkan estetika kontras tinggi, tipografi futuristik, dan elemen 3D interaktif menjadi pengalaman digital yang berkesan dan berdampak bisnis.
                     </p>
                 </div>
 
-                <div class="grid grid-cols-3 gap-3 pt-6 border-t border-white/10 text-center">
-                    <div class="bg-white/5 rounded-2xl p-3">
-                        <div class="font-display text-xl sm:text-2xl font-bold text-white">4+</div>
-                        <div class="text-[11px] text-white/60 mt-0.5">Tahun Eksplorasi</div>
+                <div>
+                    <div class="flex flex-wrap gap-2.5 mb-6">
+                        <button onclick="toggleResumeModal(true)" class="px-4 py-2.5 rounded-xl bg-white text-black font-display font-bold text-xs hover:bg-blue-500 hover:text-white transition-all">
+                            Lihat Curriculum Vitae
+                        </button>
+                        <a href="#contact" class="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-display text-xs border border-white/15 transition-all">
+                            Jadwalkan Konsultasi
+                        </a>
                     </div>
-                    <div class="bg-white/5 rounded-2xl p-3">
-                        <div class="font-display text-xl sm:text-2xl font-bold text-blue-400">65+</div>
-                        <div class="text-[11px] text-white/60 mt-0.5">Proyek Selesai</div>
-                    </div>
-                    <div class="bg-white/5 rounded-2xl p-3">
-                        <div class="font-display text-xl sm:text-2xl font-bold text-orange-400">100%</div>
-                        <div class="text-[11px] text-white/60 mt-0.5">Craft & Detail</div>
+
+                    <div class="grid grid-cols-3 gap-3 pt-5 border-t border-white/10 text-center">
+                        <div class="bg-white/5 rounded-2xl p-3">
+                            <div class="font-display text-xl sm:text-2xl font-bold text-white">4+</div>
+                            <div class="text-[11px] text-white/60 mt-0.5">Tahun Pengalaman</div>
+                        </div>
+                        <div class="bg-white/5 rounded-2xl p-3">
+                            <div class="font-display text-xl sm:text-2xl font-bold text-blue-400">65+</div>
+                            <div class="text-[11px] text-white/60 mt-0.5">Proyek Global</div>
+                        </div>
+                        <div class="bg-white/5 rounded-2xl p-3">
+                            <div class="font-display text-xl sm:text-2xl font-bold text-orange-400">12</div>
+                            <div class="text-[11px] text-white/60 mt-0.5">Brand Partners</div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- About Me & Software Arsenal -->
-            <div id="about" class="lg:col-span-7 glass-panel rounded-3xl p-7 sm:p-8 flex flex-col justify-between relative overflow-hidden">
-                <div class="absolute -bottom-24 -left-24 w-56 h-56 bg-orange-500/15 rounded-full blur-3xl"></div>
-
+            <!-- About Me & Core Software Stack Card -->
+            <div class="lg:col-span-7 glass-panel rounded-3xl p-7 sm:p-8 flex flex-col justify-between">
                 <div>
                     <div class="flex items-center justify-between mb-4">
-                        <h3 class="font-display text-xl sm:text-2xl font-bold">About Me & Creative Stack</h3>
-                        <span class="text-xs text-white/50 font-display">CLICK TOOL FOR DETAILS</span>
+                        <h3 class="font-display text-xl sm:text-2xl font-bold">Core Creative Stack</h3>
+                        <span class="text-xs text-white/50">Klik bar untuk detail keahlian</span>
                     </div>
-                    <p class="text-white/75 text-sm sm:text-base leading-relaxed mb-6">
-                        Saya percaya desain terbaik lahir ketika teknik presisi bertemu dengan keberanian visual. Dari merancang sistem antarmuka di <strong class="text-white">Figma</strong>, manipulasi foto dramatis di <strong class="text-sky-400">Photoshop</strong>, ilustrasi vektor di <strong class="text-orange-400">Illustrator</strong>, hingga ritme visual dinamis di <strong class="text-white">CapCut</strong>.
+                    <p class="text-white/70 text-sm leading-relaxed mb-6">
+                        Setiap elemen melayang pada panggung utama merepresentasikan perangkat lunak utama yang saya gunakan untuk membangun antarmuka interaktif, manipulasi visual dramatis, dan narasi gerak.
                     </p>
                 </div>
 
-                <!-- Interactive Software Stack Pills -->
                 <div class="space-y-3.5">
                     <div onclick="openToolModal('figma')" class="cursor-pointer bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl p-3.5 transition-all">
                         <div class="flex items-center justify-between text-sm mb-1.5">
                             <span class="font-semibold flex items-center gap-2">
-                                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span> Figma — UI/UX & Interactive Prototyping
+                                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span> Figma — UI/UX & Design Systems
                             </span>
-                            <span class="font-display text-xs text-blue-300">96%</span>
+                            <span class="font-display text-xs text-emerald-300">96%</span>
                         </div>
                         <div class="w-full h-2 bg-black/50 rounded-full overflow-hidden">
-                            <div class="h-full bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full" style="width: 96%"></div>
+                            <div class="h-full bg-gradient-to-r from-emerald-500 to-sky-400 rounded-full" style="width: 96%"></div>
                         </div>
                     </div>
 
                     <div onclick="openToolModal('photoshop')" class="cursor-pointer bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl p-3.5 transition-all">
                         <div class="flex items-center justify-between text-sm mb-1.5">
                             <span class="font-semibold flex items-center gap-2">
-                                <span class="w-2.5 h-2.5 rounded-full bg-sky-400"></span> Adobe Photoshop & Illustrator — Key Visual & Vector
+                                <span class="w-2.5 h-2.5 rounded-full bg-sky-400"></span> Adobe Photoshop — Key Visual & Compositing
                             </span>
-                            <span class="font-display text-xs text-sky-300">92%</span>
+                            <span class="font-display text-xs text-sky-300">94%</span>
                         </div>
                         <div class="w-full h-2 bg-black/50 rounded-full overflow-hidden">
-                            <div class="h-full bg-gradient-to-r from-sky-500 to-indigo-400 rounded-full" style="width: 92%"></div>
+                            <div class="h-full bg-gradient-to-r from-blue-600 to-sky-400 rounded-full" style="width: 94%"></div>
+                        </div>
+                    </div>
+
+                    <div onclick="openToolModal('illustrator')" class="cursor-pointer bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl p-3.5 transition-all">
+                        <div class="flex items-center justify-between text-sm mb-1.5">
+                            <span class="font-semibold flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span> Adobe Illustrator — Vector & Brand Identity
+                            </span>
+                            <span class="font-display text-xs text-amber-300">92%</span>
+                        </div>
+                        <div class="w-full h-2 bg-black/50 rounded-full overflow-hidden">
+                            <div class="h-full bg-gradient-to-r from-orange-600 to-amber-400 rounded-full" style="width: 92%"></div>
                         </div>
                     </div>
 
@@ -525,6 +581,186 @@
                 </div>
             </div>
 
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         EXPERIENCE & EDUCATION TIMELINE SECTION
+    ====================================================================== -->
+    <section id="experience" class="max-w-6xl mx-auto px-4 sm:px-6 py-16">
+        <div class="mb-10">
+            <span class="text-xs font-display tracking-widest text-blue-400 uppercase">Career & Background</span>
+            <h2 class="font-display text-3xl sm:text-4xl font-extrabold mt-1">Experience & Education</h2>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Work Experience Column -->
+            <div class="glass-panel rounded-3xl p-7 sm:p-8">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="w-9 h-9 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold">💼</span>
+                    <h3 class="font-display text-lg font-bold">Work Experience</h3>
+                </div>
+
+                <div class="relative border-l-2 border-white/15 pl-6 space-y-7 ml-2">
+                    <div class="relative">
+                        <span class="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-blue-500 ring-4 ring-blue-500/20"></span>
+                        <span class="text-[11px] font-display text-blue-400">2024 — PRESENT</span>
+                        <h4 class="font-display text-base font-bold text-white mt-0.5">Lead Visual & UI/UX Designer</h4>
+                        <p class="text-xs text-white/50 mb-2">Kinetix Digital Studio • Bandung</p>
+                        <p class="text-xs sm:text-sm text-white/75 leading-relaxed">
+                            Memimpin perancangan sistem desain UI/UX berbasis Figma, arahan seni key-visual kampanye digital, serta prototipe interaktif untuk klien teknologi dan gaya hidup.
+                        </p>
+                    </div>
+
+                    <div class="relative">
+                        <span class="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-white/40"></span>
+                        <span class="text-[11px] font-display text-white/50">2022 — 2024</span>
+                        <h4 class="font-display text-base font-bold text-white mt-0.5">Multimedia & Motion Graphic Designer</h4>
+                        <p class="text-xs text-white/50 mb-2">Nusantara Creative Lab • Jakarta</p>
+                        <p class="text-xs sm:text-sm text-white/75 leading-relaxed">
+                            Memproduksi konten visual berenergi tinggi, manipulasi foto editorial menggunakan Photoshop, serta video showreel ritmis dengan CapCut Pro.
+                        </p>
+                    </div>
+
+                    <div class="relative">
+                        <span class="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-white/40"></span>
+                        <span class="text-[11px] font-display text-white/50">2021 — 2022</span>
+                        <h4 class="font-display text-base font-bold text-white mt-0.5">Freelance Illustrator & Brand Crafter</h4>
+                        <p class="text-xs text-white/50 mb-2">Remote / Global Clients</p>
+                        <p class="text-xs sm:text-sm text-white/75 leading-relaxed">
+                            Mengerjakan lebih dari 30 identitas visual merek, ilustrasi karakter digital di Clip Studio Paint, dan aset vektor kustom untuk kreator independen.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Education & Certifications Column -->
+            <div class="glass-panel rounded-3xl p-7 sm:p-8 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <span class="w-9 h-9 rounded-xl bg-orange-500/20 text-orange-400 flex items-center justify-center font-bold">🎓</span>
+                        <h3 class="font-display text-lg font-bold">Education & Certifications</h3>
+                    </div>
+
+                    <div class="relative border-l-2 border-white/15 pl-6 space-y-7 ml-2">
+                        <div class="relative">
+                            <span class="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-orange-500 ring-4 ring-orange-500/20"></span>
+                            <span class="text-[11px] font-display text-orange-400">2018 — 2022</span>
+                            <h4 class="font-display text-base font-bold text-white mt-0.5">S.Ds. Desain Komunikasi Visual (DKV)</h4>
+                            <p class="text-xs text-white/50 mb-2">Institut Teknologi Nasional • IPK 3.84 / 4.00</p>
+                            <p class="text-xs sm:text-sm text-white/75 leading-relaxed">
+                                Fokus pada New Media, Tipografi Eksperimental, dan Perancangan Antarmuka Digital Interaktif.
+                            </p>
+                        </div>
+
+                        <div class="relative">
+                            <span class="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-white/40"></span>
+                            <span class="text-[11px] font-display text-white/50">2025 CERTIFICATION</span>
+                            <h4 class="font-display text-base font-bold text-white mt-0.5">Advanced Design Systems & Prototyping</h4>
+                            <p class="text-xs text-white/50">Figma Community & UX Academy</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Highlighted Achievement Banner -->
+                <div class="mt-8 p-4 rounded-2xl bg-gradient-to-r from-blue-600/20 to-orange-500/20 border border-white/15 flex items-center gap-4">
+                    <span class="text-2xl">🏆</span>
+                    <div>
+                        <div class="font-display text-xs font-bold text-white">Best Visual Direction Nominee 2025</div>
+                        <p class="text-[11px] text-white/65">Indonesia Digital Creative Showcase — Kategori Interactive Portfolio</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         SERVICES & WORKFLOW SECTION
+    ====================================================================== -->
+    <section id="services" class="max-w-6xl mx-auto px-4 sm:px-6 py-16">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+            <div>
+                <span class="text-xs font-display tracking-widest text-orange-400 uppercase">What I Offer</span>
+                <h2 class="font-display text-3xl sm:text-4xl font-extrabold mt-1">Services & Process</h2>
+            </div>
+            <p class="text-xs sm:text-sm text-white/65 max-w-md">
+                Solusi desain end-to-end dengan standar produksi agensi kreatif modern.
+            </p>
+        </div>
+
+        <!-- 3 Core Service Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="glass-panel rounded-3xl p-7 border border-white/10 hover:border-blue-400/50 transition-all group">
+                <div class="w-12 h-12 rounded-2xl bg-blue-500/15 border border-blue-400/30 flex items-center justify-center text-xl mb-5 group-hover:scale-110 transition-transform">
+                    💠
+                </div>
+                <h3 class="font-display text-lg font-bold mb-2">UI/UX & Interactive Web</h3>
+                <p class="text-xs sm:text-sm text-white/70 leading-relaxed mb-5">
+                    Perancangan landing page interaktif, dashboard aplikasi SaaS, dan design system responsif di Figma.
+                </p>
+                <ul class="space-y-1.5 text-xs text-white/60 border-t border-white/10 pt-4">
+                    <li>✓ Wireframe & User Flow</li>
+                    <li>✓ Interactive Prototype</li>
+                    <li>✓ Responsive Design Tokens</li>
+                </ul>
+            </div>
+
+            <div class="glass-panel rounded-3xl p-7 border border-white/10 hover:border-sky-400/50 transition-all group">
+                <div class="w-12 h-12 rounded-2xl bg-sky-500/15 border border-sky-400/30 flex items-center justify-center text-xl mb-5 group-hover:scale-110 transition-transform">
+                    🎨
+                </div>
+                <h3 class="font-display text-lg font-bold mb-2">Key Visual & Brand Identity</h3>
+                <p class="text-xs sm:text-sm text-white/70 leading-relaxed mb-5">
+                    Manipulasi foto komposit dramatis, poster kampanye, logo geometris, dan ilustrasi kustom berkarakter.
+                </p>
+                <ul class="space-y-1.5 text-xs text-white/60 border-t border-white/10 pt-4">
+                    <li>✓ Photo Compositing (Ps)</li>
+                    <li>✓ Vector & Logo System (Ai)</li>
+                    <li>✓ Custom Digital Ink (CSP)</li>
+                </ul>
+            </div>
+
+            <div class="glass-panel rounded-3xl p-7 border border-white/10 hover:border-orange-400/50 transition-all group">
+                <div class="w-12 h-12 rounded-2xl bg-orange-500/15 border border-orange-400/30 flex items-center justify-center text-xl mb-5 group-hover:scale-110 transition-transform">
+                    🎬
+                </div>
+                <h3 class="font-display text-lg font-bold mb-2">Motion & Short-Form Reels</h3>
+                <p class="text-xs sm:text-sm text-white/70 leading-relaxed mb-5">
+                    Editing video promosi dinamis, sinkronisasi audio waveform, dan kinetic typography untuk media sosial.
+                </p>
+                <ul class="space-y-1.5 text-xs text-white/60 border-t border-white/10 pt-4">
+                    <li>✓ Beat-Synced Video Edit</li>
+                    <li>✓ Kinetic Typography</li>
+                    <li>✓ Color Grading & SFX</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 4-Step Creative Workflow Strip -->
+        <div class="glass-panel rounded-3xl p-6 sm:p-8 border border-white/10">
+            <div class="text-xs font-display text-white/50 mb-5 tracking-wider">CREATIVE WORKFLOW</div>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                <div>
+                    <div class="font-display text-2xl font-black text-blue-400 mb-1">01.</div>
+                    <h4 class="font-display text-sm font-bold mb-1">Discovery & Brief</h4>
+                    <p class="text-xs text-white/60">Memahami target audiens, moodboard visual, dan tujuan utama proyek.</p>
+                </div>
+                <div>
+                    <div class="font-display text-2xl font-black text-sky-400 mb-1">02.</div>
+                    <h4 class="font-display text-sm font-bold mb-1">Concept & Wireframe</h4>
+                    <p class="text-xs text-white/60">Menyusun struktur komposisi, sketsa awal, dan eksplorasi tipografi.</p>
+                </div>
+                <div>
+                    <div class="font-display text-2xl font-black text-orange-400 mb-1">03.</div>
+                    <h4 class="font-display text-sm font-bold mb-1">Visual Craft & FX</h4>
+                    <p class="text-xs text-white/60">Eksekusi detail tinggi dengan pencahayaan, depth 3D, dan interaksi.</p>
+                </div>
+                <div>
+                    <div class="font-display text-2xl font-black text-emerald-400 mb-1">04.</div>
+                    <h4 class="font-display text-sm font-bold mb-1">Delivery & Handoff</h4>
+                    <p class="text-xs text-white/60">Penyerahan aset terorganisir rapi dan siap pakai untuk produksi.</p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -605,6 +841,57 @@
     </section>
 
     <!-- =====================================================================
+         CLIENT TESTIMONIALS SECTION
+    ====================================================================== -->
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+        <div class="mb-8">
+            <span class="text-xs font-display tracking-widest text-blue-400 uppercase">Endorsements</span>
+            <h2 class="font-display text-2xl sm:text-3xl font-extrabold mt-1">What Clients Say</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="glass-panel rounded-3xl p-6 border border-white/10 flex flex-col justify-between">
+                <p class="text-xs sm:text-sm text-white/80 italic leading-relaxed mb-6">
+                    "Raka berhasil menerjemahkan konsep produk kami menjadi antarmuka futuristik yang sangat intuitif. Konversi pengguna meningkat 38% setelah peluncuran ulang."
+                </p>
+                <div class="flex items-center gap-3 pt-4 border-t border-white/10">
+                    <div class="w-9 h-9 rounded-full bg-blue-500/30 flex items-center justify-center font-display font-bold text-xs text-blue-300">AR</div>
+                    <div>
+                        <div class="text-xs font-bold text-white">Arif Rahmansyah</div>
+                        <div class="text-[11px] text-white/50">Product Lead, Neon Nexus</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-panel rounded-3xl p-6 border border-white/10 flex flex-col justify-between">
+                <p class="text-xs sm:text-sm text-white/80 italic leading-relaxed mb-6">
+                    "Kualitas manipulasi visual dan komposisi tipografinya benar-benar di atas rata-rata. Key visual festival kami terlihat ikonik di semua media sosial."
+                </p>
+                <div class="flex items-center gap-3 pt-4 border-t border-white/10">
+                    <div class="w-9 h-9 rounded-full bg-orange-500/30 flex items-center justify-center font-display font-bold text-xs text-orange-300">ND</div>
+                    <div>
+                        <div class="text-xs font-bold text-white">Nadia Devina</div>
+                        <div class="text-[11px] text-white/50">Creative Producer, Cyber Drift</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-panel rounded-3xl p-6 border border-white/10 flex flex-col justify-between">
+                <p class="text-xs sm:text-sm text-white/80 italic leading-relaxed mb-6">
+                    "Komunikasi cepat, sangat detail pada setiap pixel, dan selalu memberikan opsi kreatif yang segar sebelum deadline."
+                </p>
+                <div class="flex items-center gap-3 pt-4 border-t border-white/10">
+                    <div class="w-9 h-9 rounded-full bg-emerald-500/30 flex items-center justify-center font-display font-bold text-xs text-emerald-300">KW</div>
+                    <div>
+                        <div class="text-xs font-bold text-white">Kevin Wijaya</div>
+                        <div class="text-[11px] text-white/50">Founder, Ignite Apparel</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================================
          CONTACT SECTION
     ====================================================================== -->
     <section id="contact" class="max-w-4xl mx-auto px-4 sm:px-6 pt-12 pb-28">
@@ -644,11 +931,11 @@
                     </div>
                     <div>
                         <label class="block text-xs text-white/70 mb-1.5">Email</label>
-                        <input type="email" required placeholder="dimas@email.com" class="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/15 text-sm text-white placeholder-white/30 focus:outline-none focus:border-blue-400">
+                        <input type="email" required placeholder="dimas@company.com" class="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/15 text-sm text-white placeholder-white/30 focus:outline-none focus:border-blue-400">
                     </div>
                     <div>
                         <label class="block text-xs text-white/70 mb-1.5">Detail Proyek</label>
-                        <textarea rows="3" required placeholder="Ceritakan konsep desain yang Anda inginkan..." class="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/15 text-sm text-white placeholder-white/30 focus:outline-none focus:border-blue-400"></textarea>
+                        <textarea rows="3" required placeholder="Ceritakan kebutuhan desain, estimasi waktu, atau ide kolaborasi..." class="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/15 text-sm text-white placeholder-white/30 focus:outline-none focus:border-blue-400"></textarea>
                     </div>
                     <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-blue-600 to-sky-500 hover:from-blue-500 hover:to-sky-400 text-white font-display font-bold text-xs tracking-wider shadow-lg shadow-blue-500/25 transition-all">
                         KIRIM PESAN SEKARANG →
@@ -659,58 +946,116 @@
     </section>
 
     <!-- Footer -->
-    <footer class="border-t border-white/10 py-8 text-center text-xs text-white/50 font-display">
-        © 2026 FORTFOLIO STUDIO — CRAFTED WITH INTERACTIVE 3D PARALLAX
+    <footer class="border-t border-white/10 py-8 text-center text-xs text-white/50">
+        <p class="font-display">© 2026 FORTFOLIO STUDIO — RAKA PRATAMA. ALL RIGHTS RESERVED.</p>
     </footer>
 
     <!-- =====================================================================
-         INTERACTIVE MODALS
+         MODALS & LIGHTBOX
     ====================================================================== -->
-    
-    <!-- 1. Tool / Project Inspector Modal -->
-    <div id="info-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/75 backdrop-blur-sm">
-        <div class="glass-panel max-w-md w-full rounded-3xl p-6 sm:p-7 relative border border-white/20 transform transition-all">
-            <button onclick="closeInfoModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-sm">✕</button>
-            <div id="modal-badge" class="inline-block px-3 py-1 rounded-full text-xs font-display mb-3 bg-blue-500/20 text-blue-300">TOOL</div>
-            <h3 id="modal-title" class="font-display text-2xl font-bold mb-2">Title</h3>
+
+    <!-- 1. Software Tool Skill Modal -->
+    <div id="info-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-md" onclick="closeInfoModal()">
+        <div class="max-w-md w-full glass-panel rounded-3xl p-6 sm:p-7 border border-white/20" onclick="event.stopPropagation()">
+            <div class="flex items-center justify-between mb-3">
+                <span id="modal-badge" class="text-[11px] font-display text-blue-400 tracking-wider">SKILL</span>
+                <button onclick="closeInfoModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-xs">✕</button>
+            </div>
+            <h3 id="modal-title" class="font-display text-2xl font-bold mb-2">Tool Title</h3>
             <p id="modal-desc" class="text-sm text-white/75 leading-relaxed mb-5">Description</p>
-            <div id="modal-tags" class="flex flex-wrap gap-2 mb-6"></div>
-            <button onclick="closeInfoModal()" class="w-full py-2.5 rounded-xl bg-white text-black font-display font-bold text-xs">Tutup</button>
+            <div id="modal-tags" class="flex flex-wrap gap-2"></div>
         </div>
     </div>
 
-    <!-- 2. Hero Customizer Modal -->
-    <div id="custom-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/75 backdrop-blur-sm">
-        <div class="glass-panel max-w-md w-full rounded-3xl p-6 sm:p-7 relative border border-white/20">
-            <button onclick="toggleCustomModal(false)" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-sm">✕</button>
-            <h3 class="font-display text-xl font-bold mb-1">Kustomisasi Hero Stage</h3>
-            <p class="text-xs text-white/60 mb-5">Unggah foto cutout (PNG transparan atau foto biasa) untuk otomatis diubah ke gaya monokrom dramatis.</p>
-            
+    <!-- 2. Customize Hero Portrait & Title Modal -->
+    <div id="custom-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-md" onclick="toggleCustomModal(false)">
+        <div class="max-w-md w-full glass-panel rounded-3xl p-6 sm:p-7 border border-white/20" onclick="event.stopPropagation()">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="font-display text-lg font-bold">Kustomisasi Hero Stage</h3>
+                <button onclick="toggleCustomModal(false)" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-xs">✕</button>
+            </div>
             <div class="space-y-4">
                 <div>
-                    <label class="block text-xs text-white/80 mb-1.5">Teks Utama Hero</label>
-                    <input id="custom-title-input" type="text" value="Fortfolio" maxlength="14" oninput="updateHeroTitle(this.value)" class="w-full px-4 py-2.5 rounded-xl bg-black/50 border border-white/15 text-sm font-display text-white focus:outline-none focus:border-blue-400">
+                    <label class="block text-xs text-white/70 mb-1.5">Teks Judul Besar (Typography)</label>
+                    <input type="text" value="Fortfolio" maxlength="14" oninput="updateHeroTitle(this.value)" class="w-full px-4 py-2.5 rounded-xl bg-black/40 border border-white/15 text-sm text-white focus:outline-none focus:border-blue-400">
                 </div>
                 <div>
-                    <label class="block text-xs text-white/80 mb-1.5">Unggah Foto Potret Anda</label>
-                    <input type="file" accept="image/*" onchange="handlePortraitUpload(event)" class="w-full text-xs text-white/70 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-display file:bg-blue-600 file:text-white hover:file:bg-blue-500 cursor-pointer">
+                    <label class="block text-xs text-white/70 mb-1.5">Unggah Foto Potret (Otomatis Monokrom)</label>
+                    <input type="file" accept="image/*" onchange="handlePortraitUpload(event)" class="w-full text-xs text-white/70 file:mr-3 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-display file:font-bold file:bg-blue-600 file:text-white hover:file:bg-blue-500 cursor-pointer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. Gallery Lightbox / Detailed Case Study Modal -->
+    <div id="lightbox-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/85 backdrop-blur-md" onclick="closeLightbox()">
+        <div class="max-w-2xl w-full glass-panel rounded-3xl overflow-hidden border border-white/20" onclick="event.stopPropagation()">
+            <img id="lightbox-img" src="" alt="Preview" class="w-full max-h-[50vh] object-cover">
+            <div class="p-6 sm:p-7">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                    <span id="lightbox-meta" class="text-[11px] font-display text-blue-400 uppercase tracking-wider">CASE STUDY • 2026</span>
+                    <button onclick="closeLightbox()" class="px-3.5 py-1.5 rounded-xl bg-white text-black font-display font-bold text-xs">Tutup ✕</button>
+                </div>
+                <h4 id="lightbox-title" class="font-display font-bold text-xl sm:text-2xl mb-2">Title</h4>
+                <p id="lightbox-desc" class="text-xs sm:text-sm text-white/75 leading-relaxed mb-4">Description</p>
+                <div id="lightbox-details" class="hidden grid-cols-2 gap-3 pt-4 border-t border-white/10 text-xs">
+                    <div class="bg-white/5 p-3 rounded-xl">
+                        <span class="text-white/50 block mb-0.5">Client / Partner</span>
+                        <span id="lightbox-client" class="font-semibold text-white">-</span>
+                    </div>
+                    <div class="bg-white/5 p-3 rounded-xl">
+                        <span class="text-white/50 block mb-0.5">Deliverables</span>
+                        <span id="lightbox-deliverables" class="font-semibold text-white">-</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. Interactive Resume / CV Modal -->
+    <div id="resume-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/85 backdrop-blur-md" onclick="toggleResumeModal(false)">
+        <div class="max-w-2xl w-full max-h-[88vh] overflow-y-auto glass-panel rounded-3xl p-6 sm:p-8 border border-white/20" onclick="event.stopPropagation()">
+            <div class="flex items-start justify-between gap-4 pb-5 border-b border-white/15">
+                <div>
+                    <span class="text-[11px] font-display text-blue-400 tracking-widest">CURRICULUM VITAE</span>
+                    <h3 class="font-display text-2xl sm:text-3xl font-black text-white mt-0.5">RAKA PRATAMA</h3>
+                    <p class="text-xs text-white/70 mt-1">Senior Visual Designer & UI/UX Crafter • Bandung, Indonesia</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="window.print()" class="px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-display font-bold text-xs">Print / PDF</button>
+                    <button onclick="toggleResumeModal(false)" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-sm">✕</button>
                 </div>
             </div>
 
-            <button onclick="toggleCustomModal(false)" class="mt-6 w-full py-2.5 rounded-xl bg-white text-black font-display font-bold text-xs">Selesai</button>
-        </div>
-    </div>
-
-    <!-- 3. Gallery Lightbox Modal -->
-    <div id="lightbox-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/85 backdrop-blur-md" onclick="closeLightbox()">
-        <div class="max-w-xl w-full glass-panel rounded-3xl overflow-hidden border border-white/20" onclick="event.stopPropagation()">
-            <img id="lightbox-img" src="" alt="Preview" class="w-full max-h-[65vh] object-cover">
-            <div class="p-5 flex items-center justify-between gap-4">
+            <div class="space-y-5 py-5 text-xs sm:text-sm text-white/80">
                 <div>
-                    <h4 id="lightbox-title" class="font-display font-bold text-lg">Title</h4>
-                    <p id="lightbox-desc" class="text-xs text-white/70 mt-0.5">Description</p>
+                    <h4 class="font-display text-xs font-bold text-blue-400 uppercase mb-1.5">Professional Summary</h4>
+                    <p class="leading-relaxed text-white/75">
+                        Desainer multidisiplin dengan pengalaman 4+ tahun menciptakan sistem antarmuka digital (UI/UX), identitas merek, key-visual kampanye, dan motion graphics dengan perhatian tinggi pada detail dan estetika modern.
+                    </p>
                 </div>
-                <button onclick="closeLightbox()" class="px-4 py-2 rounded-xl bg-white text-black font-display font-bold text-xs shrink-0">Tutup</button>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="bg-white/5 p-4 rounded-2xl border border-white/10">
+                        <h4 class="font-display text-xs font-bold text-white mb-2">Core Expertise</h4>
+                        <ul class="space-y-1 text-xs text-white/70">
+                            <li>• UI/UX Design & Prototyping (Figma)</li>
+                            <li>• Photo Compositing & Key Visual (Ps)</li>
+                            <li>• Vector & Brand Identity (Ai)</li>
+                            <li>• Motion & Short Video Editing (CapCut)</li>
+                            <li>• Digital Illustration & Inking (CSP)</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white/5 p-4 rounded-2xl border border-white/10">
+                        <h4 class="font-display text-xs font-bold text-white mb-2">Contact & Availability</h4>
+                        <ul class="space-y-1.5 text-xs text-white/70">
+                            <li>📧 hello@fortfolio.studio</li>
+                            <li>📍 Bandung, Jawa Barat, Indonesia</li>
+                            <li>🌐 behance.net/fortfolio-studio</li>
+                            <li class="text-emerald-400 font-semibold pt-1">● Open for Full-time & Freelance</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -814,48 +1159,66 @@
                 category: 'figma',
                 toolLabel: 'Figma UI/UX',
                 accent: 'text-emerald-400',
+                client: 'Neon Nexus Technologies',
+                year: '2026',
+                deliverables: 'Design System, Mobile & Web UI, Interactive Prototype',
                 image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80',
-                desc: 'Redesign dashboard keuangan dark-mode dengan visualisasi data real-time dan sistem desain modular.'
+                desc: 'Redesign dashboard keuangan dark-mode dengan visualisasi data real-time, kartu analitik glassmorphism, dan sistem desain modular berstandar WCAG.'
             },
             {
                 title: 'Cyber Drift Key Visual',
                 category: 'adobe',
                 toolLabel: 'Photoshop & Ai',
                 accent: 'text-sky-400',
+                client: 'Cyber Drift Music Festival',
+                year: '2025',
+                deliverables: 'Main Key Visual, Stage LED Graphics, Social Kit',
                 image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=800&q=80',
-                desc: 'Key visual acara musik elektronik memadukan manipulasi potret monokrom dan kristal energi biru.'
+                desc: 'Key visual acara musik elektronik memadukan manipulasi potret monokrom kontras tinggi, kristal energi biru neon, dan tipografi futuristik.'
             },
             {
                 title: 'Kinetix Showreel 2026',
                 category: 'motion',
                 toolLabel: 'CapCut Pro',
                 accent: 'text-orange-400',
+                client: 'Kinetix Creative Agency',
+                year: '2026',
+                deliverables: '60s Showreel Video, Sound Sync, Kinetic Typography',
                 image: 'https://images.unsplash.com/photo-1536240478700-b869070f9279?auto=format&fit=crop&w=800&q=80',
-                desc: 'Video promosi berdurasi 60 detik dengan sinkronisasi beat presisi, kinetic typography, dan filmstrip overlay.'
+                desc: 'Video promosi berdurasi 60 detik dengan sinkronisasi beat presisi, kinetic typography, dan transisi filmstrip dinamis.'
             },
             {
                 title: 'Ignite Brand Identity',
                 category: 'adobe',
                 toolLabel: 'Illustrator',
                 accent: 'text-orange-400',
+                client: 'Ignite Streetwear & Studio',
+                year: '2025',
+                deliverables: 'Brand Guidelines, Monogram Logo, Packaging',
                 image: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=800&q=80',
-                desc: 'Identitas visual lengkap, monogram geometris, dan palet warna kontras untuk studio kreatif.'
+                desc: 'Identitas visual lengkap, monogram geometris, dan palet warna kontras tinggi untuk studio kreatif dan lini apparel.'
             },
             {
                 title: 'Aether Spatial Web UI',
                 category: 'figma',
                 toolLabel: 'Figma Interactive',
                 accent: 'text-blue-400',
+                client: 'Aether Labs',
+                year: '2026',
+                deliverables: '3D Parallax Landing Page, Component Library',
                 image: 'https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=800&q=80',
-                desc: 'Eksplorasi antarmuka berbasis kedalaman 3D dan kartu glassmorphism responsif.'
+                desc: 'Eksplorasi antarmuka berbasis kedalaman 3D paralaks dan kartu glassmorphism responsif untuk platform kreator digital.'
             },
             {
                 title: 'Shadow Ink Series',
                 category: 'motion',
                 toolLabel: 'Clip Studio Paint',
                 accent: 'text-white',
+                client: 'Monolith Records',
+                year: '2025',
+                deliverables: 'Album Cover Art, Vinyl Sleeve, Character Ink',
                 image: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=800&q=80',
-                desc: 'Seri ilustrasi hitam-putih bertekstur kuas tinta ekspresif untuk sampul album independen.'
+                desc: 'Seri ilustrasi hitam-putih bertekstur kuas tinta ekspresif untuk sampul album musik independen.'
             }
         ];
 
@@ -863,7 +1226,7 @@
             const grid = document.getElementById('projects-grid');
             const filtered = filter === 'all' ? projectsData : projectsData.filter(p => p.category === filter);
 
-            grid.innerHTML = filtered.map((proj) => `
+            grid.innerHTML = filtered.map((proj, idx) => `
                 <article class="glass-panel rounded-3xl overflow-hidden group border border-white/10 hover:border-white/30 transition-all flex flex-col justify-between">
                     <div>
                         <div class="relative h-52 overflow-hidden bg-zinc-900">
@@ -871,14 +1234,18 @@
                             <span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-black/75 backdrop-blur-md text-[11px] font-display ${proj.accent} border border-white/10">
                                 ${proj.toolLabel}
                             </span>
+                            <span class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-black/65 text-[10px] font-display text-white/80">
+                                ${proj.year}
+                            </span>
                         </div>
                         <div class="p-6">
+                            <div class="text-[11px] text-white/50 mb-1">${proj.client}</div>
                             <h3 class="font-display text-lg font-bold mb-2 group-hover:text-blue-400 transition-colors">${proj.title}</h3>
                             <p class="text-xs sm:text-sm text-white/70 leading-relaxed">${proj.desc}</p>
                         </div>
                     </div>
                     <div class="px-6 pb-6 pt-2">
-                        <button onclick="openLightbox('${proj.title.replace(/'/g, "\\'")}', '${proj.desc.replace(/'/g, "\\'")}', '${proj.image}')" class="text-xs font-display font-bold text-white/90 hover:text-blue-400 flex items-center gap-1.5 transition-colors">
+                        <button onclick="openProjectCaseStudy(${projectsData.indexOf(proj)})" class="text-xs font-display font-bold text-white/90 hover:text-blue-400 flex items-center gap-1.5 transition-colors">
                             <span>Inspect Case Study</span>
                             <span>→</span>
                         </button>
@@ -886,20 +1253,64 @@
                 </article>
             `).join('');
         }
+        // 5. Lightbox & Case Study Functions
+        function openProjectCaseStudy(index) {
+            const proj = projectsData[index];
+            if (!proj) return;
+            document.getElementById('lightbox-meta').textContent = `${proj.toolLabel} • ${proj.year}`;
+            document.getElementById('lightbox-title').textContent = proj.title;
+            document.getElementById('lightbox-desc').textContent = proj.desc;
+            document.getElementById('lightbox-img').src = proj.image;
+            document.getElementById('lightbox-client').textContent = proj.client;
+            document.getElementById('lightbox-deliverables').textContent = proj.deliverables;
+            
+            const details = document.getElementById('lightbox-details');
+            details.classList.remove('hidden');
+            details.classList.add('grid');
 
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.filter-btn').forEach(b => {
-                    b.classList.remove('bg-white', 'text-black', 'font-bold');
-                    b.classList.add('glass-panel', 'text-white/80');
-                });
-                btn.classList.remove('glass-panel', 'text-white/80');
-                btn.classList.add('bg-white', 'text-black', 'font-bold');
-                renderProjects(btn.getAttribute('data-filter'));
-            });
-        });
+            const modal = document.getElementById('lightbox-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
 
-        // 4. Customizer Functions
+        function openLightbox(title, desc, imgSrc) {
+            document.getElementById('lightbox-meta').textContent = 'VISUAL GALLERY';
+            document.getElementById('lightbox-title').textContent = title;
+            document.getElementById('lightbox-desc').textContent = desc;
+            document.getElementById('lightbox-img').src = imgSrc;
+
+            const details = document.getElementById('lightbox-details');
+            details.classList.add('hidden');
+            details.classList.remove('grid');
+
+            const modal = document.getElementById('lightbox-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeLightbox() {
+            const modal = document.getElementById('lightbox-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function toggleResumeModal(show) {
+            const modal = document.getElementById('resume-modal');
+            if (show) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            } else {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('flex');
+        }
+
         function toggleCustomModal(show) {
             const modal = document.getElementById('custom-modal');
             if (show) {
@@ -910,6 +1321,19 @@
                 modal.classList.remove('flex');
             }
         }
+
+        // Project Filter Buttons Event Listeners
+        document.querySelectorAll('#project-filters .filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('#project-filters .filter-btn').forEach(b => {
+                    b.classList.remove('bg-white', 'text-black', 'font-bold');
+                    b.classList.add('glass-panel', 'text-white/80');
+                });
+                btn.classList.add('bg-white', 'text-black', 'font-bold');
+                btn.classList.remove('glass-panel', 'text-white/80');
+                renderProjects(btn.getAttribute('data-filter'));
+            });
+        });
 
         function updateHeroTitle(val) {
             const text = val.trim() || 'Fortfolio';
@@ -975,7 +1399,7 @@
         }
 
         // 7. Active Navbar Highlight on Scroll
-        const sections = ['home', 'profile', 'about', 'project', 'gallery', 'contact'];
+        const sections = ['home', 'profile', 'experience', 'services', 'project', 'gallery', 'contact'];
         window.addEventListener('scroll', () => {
             const navbar = document.getElementById('navbar');
             if (window.scrollY > 40) {
