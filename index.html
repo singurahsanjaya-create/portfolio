@@ -3,628 +3,1011 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ngurah Sanjaya | Cinematic Portfolio</title>
-    
+    <title>Fortfolio — Interactive Creative Director & Designer</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Orbitron for futuristic display, Plus Jakarta Sans for clean UI -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
-    
-    <!-- Phosphor Icons -->
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
-
-    <!-- Swiper.js CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-
-    <!-- Tailwind Config -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        display: ['Oswald', 'sans-serif'],
+                        display: ['Orbitron', 'sans-serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
                     },
                     colors: {
-                        darkBg: '#080808',
-                        cardBg: '#121212',
-                        brandNeon: '#ff004f',
-                        brandNeonHover: '#cc003f',
-                    },
-                    animation: {
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        studio: {
+                            top: '#58585a',
+                            mid: '#2c2c2e',
+                            dark: '#121214',
+                            neonBlue: '#0088ff',
+                            neonOrange: '#ff6a00',
+                        }
                     }
                 }
             }
         }
     </script>
+
     <style>
+        /* Custom Studio Lighting & Atmosphere */
         body {
-            background-color: #080808;
+            background: radial-gradient(circle at 50% 18%, #636366 0%, #343436 38%, #161618 78%, #0d0d0f 100%);
+            background-attachment: fixed;
             color: #ffffff;
             overflow-x: hidden;
         }
 
-        /* Utility classes for cinematic effects */
-        .text-glow {
-            text-shadow: 0 0 15px rgba(255, 0, 79, 0.8);
-        }
-        .box-glow:hover {
-            box-shadow: 0 0 25px rgba(255, 0, 79, 0.4);
-            border-color: #ff004f;
-        }
-        .skew-title {
-            transform: skewX(-5deg);
+        /* Subtle Noise Grain Texture Overlay */
+        .noise-overlay {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.035;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
-        /* Swiper Fixes */
-        .swiper-slide {
-            height: auto;
+        /* Floating Idle Animations */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(var(--rot, 0deg)); }
+            50% { transform: translateY(-14px) rotate(calc(var(--rot, 0deg) + 3deg)); }
         }
-        .coverflow-swiper .swiper-slide-active {
-            filter: drop-shadow(0 0 30px rgba(255, 0, 79, 0.5));
+        @keyframes floatReverse {
+            0%, 100% { transform: translateY(0px) rotate(var(--rot, 0deg)); }
+            50% { transform: translateY(12px) rotate(calc(var(--rot, 0deg) - 3deg)); }
         }
-        
-        /* Modal Transitions */
-        #projectModal {
-            transition: opacity 0.3s ease, visibility 0.3s ease;
+        @keyframes pulseGlowBlue {
+            0%, 100% { filter: drop-shadow(0 0 14px rgba(0, 136, 255, 0.75)); }
+            50% { filter: drop-shadow(0 0 26px rgba(0, 195, 255, 0.95)); }
         }
-        #modalContent {
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        @keyframes pulseGlowOrange {
+            0%, 100% { filter: drop-shadow(0 0 14px rgba(255, 106, 0, 0.75)); }
+            50% { filter: drop-shadow(0 0 26px rgba(255, 170, 0, 0.95)); }
         }
-        body.modal-open {
-            overflow: hidden;
+
+        .anim-float-1 { animation: floatSlow 6s ease-in-out infinite; }
+        .anim-float-2 { animation: floatReverse 7s ease-in-out infinite; }
+        .anim-float-3 { animation: floatSlow 5.5s ease-in-out infinite 1s; }
+        .glow-blue { animation: pulseGlowBlue 4s ease-in-out infinite; }
+        .glow-orange { animation: pulseGlowOrange 4s ease-in-out infinite; }
+
+        /* 3D App Icon Tile Styling */
+        .app-tile {
+            box-shadow: 
+                0 25px 45px -12px rgba(0, 0, 0, 0.75),
+                inset 0 2px 3px rgba(255, 255, 255, 0.35),
+                inset 0 -3px 6px rgba(0, 0, 0, 0.6);
+            transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
         }
-        
+        .app-tile:hover {
+            transform: scale(1.1) translateY(-4px) !important;
+            z-index: 40;
+        }
+
+        /* Glassmorphism Panels */
+        .glass-panel {
+            background: rgba(24, 24, 28, 0.72);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+        }
+
+        /* Hero Text Depth Cutout Effect */
+        .hero-word-back {
+            text-shadow: 0 15px 40px rgba(0, 0, 0, 0.65);
+            letter-spacing: -0.02em;
+        }
+        .hero-word-front {
+            -webkit-text-stroke: 2px rgba(255, 255, 255, 0.9);
+            color: transparent;
+            letter-spacing: -0.02em;
+        }
+
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #080808;
+            background: #121214;
         }
         ::-webkit-scrollbar-thumb {
-            background: #333;
-            border-radius: 4px;
+            background: #3f3f46;
+            border-radius: 9999px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #ff004f;
+            background: #0088ff;
         }
     </style>
 </head>
-<body class="antialiased selection:bg-brandNeon selection:text-white">
+<body class="font-sans antialiased selection:bg-blue-500 selection:text-white">
 
-    <!-- 1. Navbar -->
-    <nav id="navbar" class="fixed w-full z-50 top-0 transition-all duration-300 bg-gradient-to-b from-black/90 to-transparent pt-6 pb-6 px-6 md:px-12 flex items-center justify-between">
-        <a href="#hero" class="text-3xl md:text-4xl font-display font-bold tracking-widest text-brandNeon text-glow">
-            SANJAYA
-        </a>
-        
-        <!-- Desktop Nav -->
-        <div class="hidden md:flex items-center space-x-8">
-            <a href="#hero" class="text-white hover:text-brandNeon font-medium text-sm transition-colors">Home</a>
-            <a href="#about" class="text-gray-400 hover:text-white font-medium text-sm transition-colors">About</a>
-            <a href="#experience" class="text-gray-400 hover:text-white font-medium text-sm transition-colors">Experience</a>
-            <a href="#projects" class="text-gray-400 hover:text-white font-medium text-sm transition-colors">Projects</a>
+    <!-- Subtle Film Grain -->
+    <div class="noise-overlay"></div>
+
+    <!-- Custom Toast Notification -->
+    <div id="toast-box" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="glass-panel px-5 py-3.5 rounded-2xl flex items-center gap-3 border-l-4 border-blue-500">
+            <span class="w-2.5 h-2.5 rounded-full bg-blue-400 animate-ping"></span>
+            <p id="toast-message" class="text-sm font-medium text-white">Notifikasi</p>
         </div>
+    </div>
 
-        <div class="flex items-center gap-4">
-            <button class="text-gray-300 hover:text-brandNeon transition-colors" aria-label="Search">
-                <i class="ph-bold ph-magnifying-glass text-2xl"></i>
-            </button>
-            <a href="#cta" class="hidden md:flex items-center gap-2 border border-brandNeon/50 text-brandNeon hover:bg-brandNeon hover:text-white px-4 py-2 rounded-full text-sm font-bold transition-all box-glow">
-                CONTACT
+    <!-- Top Navigation Bar -->
+    <header class="fixed top-0 left-0 right-0 z-40 transition-all duration-300" id="navbar">
+        <nav class="max-w-5xl mx-auto px-4 pt-6 pb-4 flex flex-wrap items-center justify-center gap-5 sm:gap-9 text-xs sm:text-sm font-display tracking-wider">
+            <a href="#home" data-nav="home" class="nav-link relative py-1 text-white font-bold transition-opacity hover:opacity-100">
+                Home
+                <span class="nav-indicator absolute bottom-0 left-0 right-0 h-[2.5px] bg-white rounded-full transition-all duration-300"></span>
             </a>
-            <!-- Mobile Menu Icon -->
-            <button class="md:hidden text-gray-300 hover:text-brandNeon">
-                <i class="ph-bold ph-list text-2xl"></i>
-            </button>
-        </div>
-    </nav>
+            <a href="#profile" data-nav="profile" class="nav-link relative py-1 text-white/75 hover:text-white transition-all">
+                Profile
+                <span class="nav-indicator absolute bottom-0 left-0 right-0 h-[2.5px] bg-white rounded-full scale-x-0 transition-all duration-300"></span>
+            </a>
+            <a href="#about" data-nav="about" class="nav-link relative py-1 text-white/75 hover:text-white transition-all">
+                About Me
+                <span class="nav-indicator absolute bottom-0 left-0 right-0 h-[2.5px] bg-white rounded-full scale-x-0 transition-all duration-300"></span>
+            </a>
+            <a href="#project" data-nav="project" class="nav-link relative py-1 text-white/75 hover:text-white transition-all">
+                Project
+                <span class="nav-indicator absolute bottom-0 left-0 right-0 h-[2.5px] bg-white rounded-full scale-x-0 transition-all duration-300"></span>
+            </a>
+            <a href="#gallery" data-nav="gallery" class="nav-link relative py-1 text-white/75 hover:text-white transition-all">
+                Social gallery
+                <span class="nav-indicator absolute bottom-0 left-0 right-0 h-[2.5px] bg-white rounded-full scale-x-0 transition-all duration-300"></span>
+            </a>
+            <a href="#contact" data-nav="contact" class="nav-link relative py-1 text-white/75 hover:text-white transition-all">
+                Contact
+                <span class="nav-indicator absolute bottom-0 left-0 right-0 h-[2.5px] bg-white rounded-full scale-x-0 transition-all duration-300"></span>
+            </a>
+        </nav>
+    </header>
 
-    <!-- 2. Hero Section -->
-    <section id="hero" class="relative h-screen w-full flex items-center overflow-hidden">
-        <!-- Background Image (Cyberpunk/Dark setup) -->
-        <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=2564&auto=format&fit=crop" alt="Hero Background" class="w-full h-full object-cover opacity-40">
-            <div class="absolute inset-0 bg-gradient-to-r from-darkBg via-darkBg/80 to-transparent"></div>
-            <div class="absolute inset-0 bg-gradient-to-t from-darkBg via-transparent to-transparent"></div>
-        </div>
+    <!-- =====================================================================
+         HERO STAGE: INTERACTIVE 3D PARALLAX CANVAS
+    ====================================================================== -->
+    <section id="home" class="relative min-h-screen w-full flex items-center justify-center pt-20 pb-10 overflow-hidden select-none">
+        
+        <!-- Interactive Studio Container -->
+        <div id="hero-stage" class="relative w-full max-w-6xl h-[620px] sm:h-[700px] md:h-[760px] mx-auto flex items-center justify-center px-4">
 
-        <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full mt-20">
-            <div class="max-w-3xl">
-                <!-- Tagline/Rating -->
-                <div class="flex items-center gap-3 text-xs md:text-sm font-medium text-gray-300 mb-6 flex-wrap">
-                    <span class="bg-gray-800 text-white px-2 py-1 rounded border border-gray-600 flex items-center gap-1 font-bold">
-                        13+
-                    </span>
-                    <span>2026</span>
-                    <span class="text-gray-600">|</span>
-                    <span>UI/UX & Graphic Design</span>
-                    <span class="text-gray-600">|</span>
-                    <span>Illustrator</span>
-                    <span class="text-gray-600">|</span>
-                    <span class="flex items-center gap-1 text-brandNeon"><i class="ph-fill ph-map-pin"></i> Bali, ID</span>
-                </div>
-
-                <!-- Main Title -->
-                <h1 class="text-6xl md:text-8xl lg:text-[100px] font-display font-bold uppercase tracking-tight leading-[0.9] mb-6 skew-title">
-                    Ngurah <br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-gray-600">
-                        Sanjaya
-                    </span>
-                </h1>
-                
-                <p class="text-base md:text-lg text-gray-400 mb-10 max-w-xl leading-relaxed">
-                    Graphic Designer, UI/UX Designer, Digital Illustrator, & Photographer. Merangkai cerita melalui elemen visual yang sinematik, modern, dan fungsional.
-                </p>
-
-                <!-- Action Buttons -->
-                <div class="flex items-center gap-4">
-                    <button onclick="openModal('hire')" class="bg-brandNeon hover:bg-brandNeonHover text-white px-8 py-3.5 rounded-full font-bold flex items-center gap-3 transition-all shadow-[0_0_20px_rgba(255,0,79,0.5)] hover:scale-105 active:scale-95 uppercase tracking-wider text-sm md:text-base">
-                        HIRE ME
-                        <i class="ph-bold ph-lightning text-xl"></i>
-                    </button>
-                    <a href="#projects" class="px-8 py-3.5 rounded-full font-bold flex items-center gap-3 transition-all border-2 border-white/30 hover:border-white hover:bg-white/10 uppercase tracking-wider text-sm md:text-base text-white">
-                        PLAY PORTFOLIO
-                        <i class="ph-fill ph-play-circle text-xl"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 3. About Section -->
-    <section id="about" class="py-24 relative bg-darkBg">
-        <div class="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <!-- Left: Profile Image -->
-            <div class="relative group">
-                <div class="absolute inset-0 bg-brandNeon rounded-2xl blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-500"></div>
-                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop" alt="Profile Workspace" class="relative z-10 w-full rounded-2xl border border-white/10 grayscale-[50%] group-hover:grayscale-0 transition-all duration-500 shadow-2xl">
-                <!-- Floating Badge -->
-                <div class="absolute -bottom-6 -right-6 z-20 bg-cardBg border border-brandNeon/50 p-4 rounded-xl shadow-[0_0_15px_rgba(255,0,79,0.3)] backdrop-blur-md">
-                    <p class="font-display text-2xl font-bold text-white">DKV</p>
-                    <p class="text-xs text-brandNeon font-medium uppercase tracking-widest">Student</p>
+            <!-- 1. TOP LEFT: FIGMA 3D TILE + BLUE ENERGY RING -->
+            <div class="parallax-layer absolute top-[10%] left-[4%] sm:left-[8%] md:left-[10%] z-20 cursor-pointer group" data-depth="0.045" onclick="openToolModal('figma')">
+                <div class="anim-float-1 relative" style="--rot: -14deg;">
+                    <svg class="absolute -inset-6 w-36 h-36 sm:w-44 sm:h-44 glow-blue pointer-events-none" viewBox="0 0 200 200" fill="none">
+                        <path d="M22 92 C 10 135, 130 175, 182 125" stroke="url(#blueSwirl1)" stroke-width="8" stroke-linecap="round"/>
+                        <path d="M32 76 C 18 110, 95 148, 165 118" stroke="#7dd3fc" stroke-width="2.5" stroke-linecap="round" opacity="0.85"/>
+                        <defs>
+                            <linearGradient id="blueSwirl1" x1="0" y1="0" x2="200" y2="200" gradientUnits="userSpaceOnUse">
+                                <stop offset="0%" stop-color="#00c6ff"/>
+                                <stop offset="60%" stop-color="#0072ff"/>
+                                <stop offset="100%" stop-color="transparent"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <div class="app-tile relative w-20 h-20 sm:w-28 sm:h-28 rounded-[24px] sm:rounded-[30px] bg-gradient-to-br from-[#2c2c32] to-[#111114] border border-white/15 flex items-center justify-center p-4">
+                        <svg viewBox="0 0 38 57" class="w-10 h-14 sm:w-12 sm:h-16 drop-shadow-md">
+                            <path fill="#1abcfe" d="M19 28.5A9.5 9.5 0 1 1 28.5 19 9.5 9.5 0 0 1 19 28.5Z"/>
+                            <path fill="#0acf83" d="M9.5 47.5A9.5 9.5 0 0 1 19 38v9.5a9.5 9.5 0 0 1-9.5 0Z"/>
+                            <path fill="#ff7262" d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19Z"/>
+                            <path fill="#f24e1e" d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5Z"/>
+                            <path fill="#a259ff" d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5Z"/>
+                        </svg>
+                    </div>
+                    <span class="opacity-0 group-hover:opacity-100 transition-opacity absolute -bottom-7 left-1/2 -translate-x-1/2 text-[11px] font-display bg-black/80 px-2.5 py-0.5 rounded-full border border-blue-400/40 whitespace-nowrap">Figma UI/UX</span>
                 </div>
             </div>
 
-            <!-- Right: Text Content -->
-            <div>
-                <h2 class="text-brandNeon font-display tracking-widest uppercase text-sm font-bold mb-3 flex items-center gap-2">
-                    <span class="w-8 h-[2px] bg-brandNeon"></span> Behind The Scenes
-                </h2>
-                <h3 class="text-4xl md:text-5xl font-display font-bold text-white mb-6 uppercase skew-title">About Me</h3>
-                <p class="text-gray-400 leading-relaxed mb-6 text-lg">
-                    Saya adalah seorang siswa <span class="text-white font-medium">Desain Komunikasi Visual (DKV) di SMK TI Bali Global Badung</span>. Berbasis di Bali, Indonesia, saya memiliki minat besar dan fokus mendalam pada eksplorasi desain web (UI/UX), ilustrasi digital, serta membangun sistem desain yang solid.
-                </p>
-                <p class="text-gray-400 leading-relaxed mb-8 text-lg">
-                    Memadukan estetika visual dengan fungsionalitas adalah tujuan utama dalam setiap karya yang saya hasilkan. Saya percaya desain bukan hanya soal tampilan, tapi bagaimana visual bisa berkomunikasi secara efektif.
-                </p>
-
-                <!-- Stats/Skills -->
-                <div class="grid grid-cols-2 gap-6 pt-6 border-t border-white/10">
-                    <div>
-                        <h4 class="text-white font-bold text-lg mb-1">UI/UX Design</h4>
-                        <p class="text-gray-500 text-sm">Figma, Wireframing, Prototyping</p>
-                    </div>
-                    <div>
-                        <h4 class="text-white font-bold text-lg mb-1">Illustration</h4>
-                        <p class="text-gray-500 text-sm">Digital Art, Character Design</p>
-                    </div>
-                    <div>
-                        <h4 class="text-white font-bold text-lg mb-1">Graphic Design</h4>
-                        <p class="text-gray-500 text-sm">Branding, Posters, Layouting</p>
-                    </div>
-                    <div>
-                        <h4 class="text-white font-bold text-lg mb-1">Photography</h4>
-                        <p class="text-gray-500 text-sm">Documentation, Retouching</p>
-                    </div>
+            <!-- 2. TOP CENTER-LEFT: COLOR PALETTE PILL + CURSOR ARROW -->
+            <div class="parallax-layer hidden sm:flex items-center gap-4 absolute top-[11%] left-[27%] md:left-[28%] z-20" data-depth="0.06">
+                <div class="anim-float-2 glass-panel px-4 py-2.5 rounded-2xl flex items-center gap-2.5 border border-white/15 shadow-2xl" style="--rot: 10deg;">
+                    <span class="w-4 h-4 rounded-full bg-[#ff2e4c] shadow-inner"></span>
+                    <span class="w-4 h-4 rounded-full bg-[#8b5cf6] shadow-inner"></span>
+                    <span class="w-4 h-4 rounded-full bg-[#10b981] shadow-inner"></span>
+                    <span class="w-4 h-4 rounded-full bg-[#f59e0b] shadow-inner"></span>
+                    <span class="w-4 h-4 rounded-full bg-[#27272a] border border-white/20"></span>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 4. Experience Section (Actor List Style) -->
-    <section id="experience" class="py-24 bg-[#0a0a0a] relative overflow-hidden">
-        <!-- Top Gradient -->
-        <div class="absolute top-0 w-full h-px bg-gradient-to-r from-transparent via-brandNeon/50 to-transparent"></div>
-
-        <div class="max-w-7xl mx-auto px-6 md:px-12">
-            <div class="flex items-end justify-between mb-10 border-b border-white/10 pb-6">
-                <div>
-                    <h2 class="text-4xl md:text-5xl font-display font-bold text-white uppercase skew-title">Experience</h2>
-                    <p class="text-gray-500 mt-2 text-sm uppercase tracking-widest">Perjalanan & Kolaborasi</p>
-                </div>
-                <!-- Swiper Navigation -->
-                <div class="flex gap-2">
-                    <button class="exp-prev w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:border-brandNeon hover:text-brandNeon transition-colors text-white">
-                        <i class="ph-bold ph-arrow-left"></i>
-                    </button>
-                    <button class="exp-next w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:border-brandNeon hover:text-brandNeon transition-colors text-white">
-                        <i class="ph-bold ph-arrow-right"></i>
-                    </button>
-                </div>
+                <svg class="w-9 h-9 drop-shadow-[0_8px_12px_rgba(0,0,0,0.8)] -rotate-12" viewBox="0 0 32 32" fill="none">
+                    <path d="M6 4L26 15L16.5 18.5L13 28L6 4Z" fill="#18181b" stroke="#ffffff" stroke-width="2.2" stroke-linejoin="round"/>
+                </svg>
             </div>
 
-            <!-- Swiper Container -->
-            <div class="swiper exp-swiper overflow-visible">
-                <div class="swiper-wrapper">
-                    <!-- Exp 1 -->
-                    <div class="swiper-slide !w-[280px] md:!w-[320px]">
-                        <div class="bg-cardBg p-6 rounded-2xl border border-white/5 hover:border-brandNeon/50 transition-colors group h-full">
-                            <div class="w-16 h-16 rounded-full bg-brandNeon/10 text-brandNeon flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                                <i class="ph-fill ph-laptop text-3xl"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-white mb-2 font-display">Freelance Designer</h3>
-                            <p class="text-gray-400 text-sm">Mengerjakan berbagai proyek desain grafis, mulai dari poster, identitas merek, hingga materi promosi untuk klien.</p>
+            <!-- 3. MID LEFT: FLOATING LAYERS UI PANEL -->
+            <div class="parallax-layer hidden md:block absolute top-[35%] left-[3%] lg:left-[6%] z-10" data-depth="0.035">
+                <div class="anim-float-3 glass-panel w-44 rounded-2xl p-3 text-[11px] text-white/80 border border-white/15" style="--rot: 8deg;">
+                    <div class="flex items-center justify-between pb-2 mb-2 border-b border-white/10 font-semibold text-white/90">
+                        <span>Layers</span>
+                        <span class="text-white/40">•••</span>
+                    </div>
+                    <div class="space-y-1.5">
+                        <div class="flex items-center gap-2 bg-white/10 px-2 py-1 rounded-lg">
+                            <span class="text-blue-400">👁</span>
+                            <span class="w-3 h-3 rounded-sm bg-white"></span>
+                            <span class="truncate">Portrait_Cutout</span>
                         </div>
-                    </div>
-                    <!-- Exp 2 -->
-                    <div class="swiper-slide !w-[280px] md:!w-[320px]">
-                        <div class="bg-cardBg p-6 rounded-2xl border border-white/5 hover:border-brandNeon/50 transition-colors group h-full">
-                            <div class="w-16 h-16 rounded-full bg-brandNeon/10 text-brandNeon flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                                <i class="ph-fill ph-pen-nib text-3xl"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-white mb-2 font-display">PKL UI/UX</h3>
-                            <p class="text-gray-400 text-sm">Praktek Kerja Lapangan dengan fokus pada User Interface dan User Experience. Membangun wireframe dan hi-fi prototype.</p>
+                        <div class="flex items-center gap-2 px-2 py-1 rounded-lg opacity-75">
+                            <span>👁</span>
+                            <span class="w-3 h-3 rounded-sm bg-blue-500"></span>
+                            <span class="truncate">Glow_Aura</span>
                         </div>
-                    </div>
-                    <!-- Exp 3 -->
-                    <div class="swiper-slide !w-[280px] md:!w-[320px]">
-                        <div class="bg-cardBg p-6 rounded-2xl border border-white/5 hover:border-brandNeon/50 transition-colors group h-full">
-                            <div class="w-16 h-16 rounded-full bg-brandNeon/10 text-brandNeon flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                                <i class="ph-fill ph-palette text-3xl"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-white mb-2 font-display">Featured Artist</h3>
-                            <p class="text-brandNeon text-xs font-bold uppercase tracking-wider mb-2">Bhuwana Virchita Mandala</p>
-                            <p class="text-gray-400 text-sm">Terpilih sebagai seniman yang karyanya dipamerkan, menampilkan eksplorasi seni visual kontemporer.</p>
+                        <div class="flex items-center gap-2 px-2 py-1 rounded-lg opacity-60">
+                            <span>👁</span>
+                            <span class="w-3 h-3 rounded-sm bg-orange-500"></span>
+                            <span class="truncate">Vector_Grid</span>
                         </div>
-                    </div>
-                    <!-- Exp 4 -->
-                    <div class="swiper-slide !w-[280px] md:!w-[320px]">
-                        <div class="bg-cardBg p-6 rounded-2xl border border-white/5 hover:border-brandNeon/50 transition-colors group h-full">
-                            <div class="w-16 h-16 rounded-full bg-brandNeon/10 text-brandNeon flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                                <i class="ph-fill ph-camera text-3xl"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-white mb-2 font-display">Dokumentasi</h3>
-                            <p class="text-brandNeon text-xs font-bold uppercase tracking-wider mb-2">Hunting Sakti 4</p>
-                            <p class="text-gray-400 text-sm">Bertanggung jawab atas fotografi dan dokumentasi acara, menangkap momen-momen krusial dengan gaya sinematik.</p>
+                        <div class="pt-1 border-t border-white/10 text-[10px] text-white/50 flex justify-between">
+                            <span>+ Effects</span>
+                            <span>100%</span>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- 5. Projects Section (Selected Films 3D Style) -->
-    <section id="projects" class="py-24 relative overflow-hidden bg-gradient-to-b from-[#0a0a0a] to-darkBg">
-        <!-- Radial Glow Background -->
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-brandNeon/10 rounded-full blur-[150px] pointer-events-none"></div>
-
-        <div class="text-center mb-12 relative z-10">
-            <span class="bg-brandNeon text-white px-6 py-2 rounded-full text-sm font-bold tracking-widest uppercase shadow-[0_0_20px_rgba(255,0,79,0.4)]">
-                Selected Works
-            </span>
-            <h2 class="text-3xl md:text-5xl font-display font-bold text-white uppercase skew-title mt-8">
-                Featured Projects
-            </h2>
-        </div>
-
-        <div class="w-full relative z-10">
-            <!-- 3D Coverflow Swiper -->
-            <div class="swiper projects-swiper pb-16 pt-4">
-                <div class="swiper-wrapper">
-                    
-                    <!-- Project 1: Kadazen -->
-                    <div class="swiper-slide !w-[280px] md:!w-[380px]">
-                        <div onclick="openModal('kadazen')" class="aspect-[3/4] rounded-2xl overflow-hidden border-2 border-transparent box-glow bg-cardBg relative group cursor-pointer shadow-2xl transition-all duration-300">
-                            <!-- Placeholder image representing branding -->
-                            <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="KADAZEN">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
-                            
-                            <!-- Hover Play Button -->
-                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <div class="w-20 h-20 bg-brandNeon/90 rounded-full flex items-center justify-center text-white shadow-[0_0_30px_rgba(255,0,79,1)] scale-75 group-hover:scale-100 transition-all duration-300 backdrop-blur-sm">
-                                    <i class="ph-fill ph-play text-3xl ml-2"></i>
-                                </div>
-                            </div>
-
-                            <div class="absolute bottom-0 left-0 w-full p-6 translate-y-2 group-hover:translate-y-0 transition-transform">
-                                <span class="text-brandNeon text-xs font-bold uppercase tracking-wider mb-1 block text-glow">Branding</span>
-                                <h3 class="text-2xl md:text-3xl font-display font-bold text-white mb-2 leading-none uppercase">KADAZEN</h3>
-                            </div>
-                        </div>
+            <!-- 4. BOTTOM LEFT: CLIP STUDIO / INK SWIRL + STYLUS PEN -->
+            <div class="parallax-layer absolute bottom-[12%] left-[5%] sm:left-[9%] md:left-[11%] z-20 cursor-pointer group" data-depth="0.055" onclick="openToolModal('csp')">
+                <div class="anim-float-2 relative" style="--rot: -18deg;">
+                    <svg class="absolute -inset-8 w-40 h-40 sm:w-48 sm:h-48 pointer-events-none drop-shadow-[0_10px_20px_rgba(0,0,0,0.85)]" viewBox="0 0 200 200" fill="none">
+                        <path d="M35 130 C 5 85, 65 25, 135 55 C 185 75, 175 155, 115 165 C 65 172, 25 140, 48 105" stroke="url(#inkSwirl)" stroke-width="14" stroke-linecap="round"/>
+                        <path d="M120 165 C 155 165, 180 140, 172 115" stroke="#0099ff" stroke-width="5" stroke-linecap="round"/>
+                        <defs>
+                            <linearGradient id="inkSwirl" x1="20" y1="40" x2="170" y2="160" gradientUnits="userSpaceOnUse">
+                                <stop offset="0%" stop-color="#ffffff"/>
+                                <stop offset="50%" stop-color="#18181b"/>
+                                <stop offset="100%" stop-color="#e4e4e7"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <div class="app-tile relative w-20 h-20 sm:w-24 sm:h-24 rounded-[22px] sm:rounded-[28px] bg-gradient-to-br from-white to-zinc-200 flex items-center justify-center p-3">
+                        <svg viewBox="0 0 64 64" class="w-12 h-12 text-zinc-900">
+                            <path fill="currentColor" d="M36 12c-11 0-20 8.5-20 19.5 0 8.2 5 15.2 12.2 18.1l3.3-7.8C27.4 40 24.5 36.1 24.5 31.5c0-6.2 5.1-11.2 11.5-11.2 5.4 0 9.9 3.7 11.1 8.7H35v8h20.5c.3-1.8.5-3.6.5-5.5C56 20.5 47 12 36 12z"/>
+                        </svg>
                     </div>
-
-                    <!-- Project 2: Lahilote -->
-                    <div class="swiper-slide !w-[280px] md:!w-[380px]">
-                        <div onclick="openModal('lahilote')" class="aspect-[3/4] rounded-2xl overflow-hidden border-2 border-transparent box-glow bg-cardBg relative group cursor-pointer shadow-2xl transition-all duration-300">
-                            <!-- Placeholder image representing animation/story -->
-                            <img src="https://images.unsplash.com/photo-1618519764620-7403abdbdf9c?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Lahilote">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
-                            
-                            <!-- Hover Play Button -->
-                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <div class="w-20 h-20 bg-brandNeon/90 rounded-full flex items-center justify-center text-white shadow-[0_0_30px_rgba(255,0,79,1)] scale-75 group-hover:scale-100 transition-all duration-300 backdrop-blur-sm">
-                                    <i class="ph-fill ph-play text-3xl ml-2"></i>
-                                </div>
-                            </div>
-
-                            <div class="absolute bottom-0 left-0 w-full p-6 translate-y-2 group-hover:translate-y-0 transition-transform">
-                                <span class="text-brandNeon text-xs font-bold uppercase tracking-wider mb-1 block text-glow">Animasi</span>
-                                <h3 class="text-2xl md:text-3xl font-display font-bold text-white mb-2 leading-none uppercase">Lahilote</h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 3: Fatamorgana -->
-                    <div class="swiper-slide !w-[280px] md:!w-[380px]">
-                        <div onclick="openModal('fatamorgana')" class="aspect-[3/4] rounded-2xl overflow-hidden border-2 border-transparent box-glow bg-cardBg relative group cursor-pointer shadow-2xl transition-all duration-300">
-                            <!-- Placeholder image representing digital illustration -->
-                            <img src="https://images.unsplash.com/photo-1558865869-c93f6f8482af?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Fatamorgana">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
-                            
-                            <!-- Hover Play Button -->
-                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <div class="w-20 h-20 bg-brandNeon/90 rounded-full flex items-center justify-center text-white shadow-[0_0_30px_rgba(255,0,79,1)] scale-75 group-hover:scale-100 transition-all duration-300 backdrop-blur-sm">
-                                    <i class="ph-fill ph-play text-3xl ml-2"></i>
-                                </div>
-                            </div>
-
-                            <div class="absolute bottom-0 left-0 w-full p-6 translate-y-2 group-hover:translate-y-0 transition-transform">
-                                <span class="text-brandNeon text-xs font-bold uppercase tracking-wider mb-1 block text-glow">Ilustrasi Digital</span>
-                                <h3 class="text-2xl md:text-3xl font-display font-bold text-white mb-2 leading-none uppercase">Fatamorgana <br>di Tengah Lara</h3>
-                            </div>
-                        </div>
-                    </div>
-
+                    <div class="absolute -bottom-3 -left-3 w-20 h-2.5 bg-gradient-to-r from-zinc-900 via-zinc-700 to-zinc-300 rounded-full -rotate-45 shadow-xl border border-white/20"></div>
+                    <span class="opacity-0 group-hover:opacity-100 transition-opacity absolute -bottom-8 left-1/2 -translate-x-1/2 text-[11px] font-display bg-black/80 px-2.5 py-0.5 rounded-full border border-white/30 whitespace-nowrap">Illustration & Ink</span>
                 </div>
-                <!-- Pagination -->
-                <div class="swiper-pagination !bottom-0"></div>
             </div>
-        </div>
-    </section>
 
-    <!-- 6. Call to Action (CTA) -->
-    <section id="cta" class="py-24 relative overflow-hidden">
-        <!-- Deep Red Gradient Background -->
-        <div class="absolute inset-0 bg-gradient-to-br from-red-950 via-[#2a000a] to-darkBg z-0"></div>
-        <!-- Grid pattern overlay -->
-        <div class="absolute inset-0 z-0 opacity-10" style="background-image: linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px); background-size: 40px 40px;"></div>
+            <!-- 5. TOP CENTER-RIGHT: BLUE CRYSTAL SHARDS + BEZIER CURVE HANDLE -->
+            <div class="parallax-layer absolute top-[8%] right-[24%] sm:right-[29%] z-20 pointer-events-none" data-depth="0.065">
+                <div class="anim-float-1 relative">
+                    <svg class="w-20 h-20 sm:w-24 sm:h-24 glow-blue" viewBox="0 0 120 120" fill="none">
+                        <polygon points="55,10 75,45 55,80 35,45" fill="url(#crystalGrad1)" stroke="#93c5fd" stroke-width="1.5"/>
+                        <polygon points="82,28 102,55 85,82 68,55" fill="url(#crystalGrad2)" stroke="#60a5fa" stroke-width="1.5"/>
+                        <polygon points="32,42 48,65 32,88 18,65" fill="url(#crystalGrad1)" stroke="#bfdbfe" stroke-width="1.2"/>
+                        <defs>
+                            <linearGradient id="crystalGrad1" x1="35" y1="10" x2="75" y2="80" gradientUnits="userSpaceOnUse">
+                                <stop offset="0%" stop-color="#60a5fa"/>
+                                <stop offset="50%" stop-color="#1d4ed8"/>
+                                <stop offset="100%" stop-color="#0f172a"/>
+                            </linearGradient>
+                            <linearGradient id="crystalGrad2" x1="68" y1="28" x2="102" y2="82" gradientUnits="userSpaceOnUse">
+                                <stop offset="0%" stop-color="#38bdf8"/>
+                                <stop offset="100%" stop-color="#1e3a8a"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <svg class="w-28 h-14 -ml-14 -mt-3" viewBox="0 0 120 50" fill="none">
+                        <path d="M12 12 Q 65 8, 105 40" stroke="#3b82f6" stroke-width="2"/>
+                        <rect x="7" y="7" width="9" height="9" fill="#3b82f6" stroke="#ffffff" stroke-width="1.5"/>
+                        <circle cx="105" cy="40" r="4.5" fill="#3b82f6" stroke="#ffffff" stroke-width="1.5"/>
+                    </svg>
+                </div>
+            </div>
 
-        <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
-            <i class="ph-fill ph-film-strip text-6xl text-brandNeon mb-6 animate-pulse-slow"></i>
-            <h2 class="text-5xl md:text-7xl font-display font-bold text-white uppercase mb-6 skew-title text-glow">
-                Mari Berkolaborasi!
-            </h2>
-            <p class="text-gray-300 text-lg md:text-xl mb-12 max-w-2xl mx-auto">
-                Punya ide brilian atau proyek menantang? Mari wujudkan visi Anda menjadi karya visual yang luar biasa bersama saya.
-            </p>
+            <!-- 6. TOP RIGHT: CAPCUT WHITE TILE + CINEMA FILMSTRIP -->
+            <div class="parallax-layer absolute top-[12%] right-[5%] sm:right-[9%] md:right-[11%] z-20 cursor-pointer group" data-depth="0.05" onclick="openToolModal('capcut')">
+                <div class="anim-float-3 relative" style="--rot: 12deg;">
+                    <svg class="absolute -inset-9 w-44 h-44 sm:w-52 sm:h-52 pointer-events-none drop-shadow-2xl" viewBox="0 0 220 220" fill="none">
+                        <path d="M60 25 C 125 5, 195 45, 175 110 C 155 165, 45 185, 25 135" stroke="#18181b" stroke-width="22" stroke-linecap="round"/>
+                        <path d="M60 25 C 125 5, 195 45, 175 110 C 155 165, 45 185, 25 135" stroke="#e4e4e7" stroke-width="16" stroke-dasharray="10 6"/>
+                    </svg>
+                    <div class="app-tile relative w-20 h-20 sm:w-26 sm:h-26 md:w-28 md:h-28 rounded-[24px] sm:rounded-[30px] bg-gradient-to-br from-white via-zinc-100 to-zinc-300 flex items-center justify-center p-4">
+                        <svg viewBox="0 0 64 64" class="w-12 h-12 sm:w-14 sm:h-14 text-black">
+                            <path fill="currentColor" d="M14 18l18 11 18-11v6L37 32l13 8v6L32 35 14 46v-6l13-8-13-8v-6z"/>
+                            <path fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round" d="M14 17h36v8M14 47h36v-8"/>
+                        </svg>
+                    </div>
+                    <svg class="w-8 h-8 absolute -bottom-3 -right-2 drop-shadow-lg" viewBox="0 0 32 32" fill="none">
+                        <path d="M6 4L26 15L16.5 18.5L13 28L6 4Z" fill="#18181b" stroke="#ffffff" stroke-width="2.2" stroke-linejoin="round"/>
+                    </svg>
+                    <span class="opacity-0 group-hover:opacity-100 transition-opacity absolute -bottom-8 left-1/2 -translate-x-1/2 text-[11px] font-display bg-black/80 px-2.5 py-0.5 rounded-full border border-white/30 whitespace-nowrap">CapCut Video Edit</span>
+                </div>
+            </div>
+
+            <!-- 7. MID RIGHT: AUDIO WAVEFORM TIMELINE UI -->
+            <div class="parallax-layer hidden lg:block absolute top-[35%] right-[3%] z-10" data-depth="0.035">
+                <div class="anim-float-2 glass-panel w-48 rounded-xl p-2.5 border border-white/15" style="--rot: -7deg;">
+                    <div class="flex items-center justify-between text-[10px] text-white/60 mb-1.5">
+                        <span>00:14:08</span>
+                        <span class="w-4 h-4 rounded-full bg-white text-black flex items-center justify-center text-[8px]">▶</span>
+                    </div>
+                    <div class="h-7 bg-black/60 rounded-lg px-2 flex items-center gap-[2px] overflow-hidden">
+                        <span class="w-1 h-2 bg-sky-400 rounded-full"></span>
+                        <span class="w-1 h-4 bg-sky-400 rounded-full"></span>
+                        <span class="w-1 h-5 bg-blue-500 rounded-full"></span>
+                        <span class="w-1 h-3 bg-sky-400 rounded-full"></span>
+                        <span class="w-1 h-6 bg-cyan-300 rounded-full"></span>
+                        <span class="w-1 h-4 bg-sky-400 rounded-full"></span>
+                        <span class="w-1 h-2 bg-blue-500 rounded-full"></span>
+                        <span class="w-1 h-5 bg-sky-400 rounded-full"></span>
+                        <span class="w-1 h-3 bg-cyan-300 rounded-full"></span>
+                        <span class="w-1 h-6 bg-blue-500 rounded-full"></span>
+                        <span class="w-1 h-4 bg-sky-400 rounded-full"></span>
+                        <span class="w-1 h-2 bg-sky-400 rounded-full"></span>
+                        <span class="w-1 h-5 bg-cyan-300 rounded-full"></span>
+                        <span class="w-1 h-3 bg-blue-500 rounded-full"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8. LOWER-MID RIGHT: PHOTOSHOP (Ps) TILE + BLUE ENERGY SWIRL -->
+            <div class="parallax-layer absolute top-[45%] right-[7%] sm:right-[13%] md:right-[15%] z-20 cursor-pointer group" data-depth="0.045" onclick="openToolModal('photoshop')">
+                <div class="anim-float-1 relative" style="--rot: 15deg;">
+                    <svg class="absolute -inset-7 w-36 h-36 sm:w-44 sm:h-44 glow-blue pointer-events-none" viewBox="0 0 200 200" fill="none">
+                        <path d="M18 115 C 35 165, 165 160, 185 95" stroke="url(#blueSwirl2)" stroke-width="8" stroke-linecap="round"/>
+                        <defs>
+                            <linearGradient id="blueSwirl2" x1="18" y1="115" x2="185" y2="95" gradientUnits="userSpaceOnUse">
+                                <stop offset="0%" stop-color="#38bdf8"/>
+                                <stop offset="100%" stop-color="#0284c7"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <div class="app-tile relative w-20 h-20 sm:w-24 sm:h-24 rounded-[22px] sm:rounded-[26px] bg-gradient-to-br from-[#001e36] to-[#000d1a] border-2 border-[#31a8ff]/60 flex items-center justify-center">
+                        <span class="font-sans font-bold text-3xl sm:text-4xl text-[#31a8ff] tracking-tight">Ps</span>
+                    </div>
+                    <span class="opacity-0 group-hover:opacity-100 transition-opacity absolute -bottom-7 left-1/2 -translate-x-1/2 text-[11px] font-display bg-black/80 px-2.5 py-0.5 rounded-full border border-sky-400/40 whitespace-nowrap">Adobe Photoshop</span>
+                </div>
+            </div>
+
+            <!-- 9. BOTTOM RIGHT: ILLUSTRATOR (Ai) TILE + FIERY ORANGE SWIRL -->
+            <div class="parallax-layer absolute bottom-[9%] right-[6%] sm:right-[11%] md:right-[13%] z-20 cursor-pointer group" data-depth="0.06" onclick="openToolModal('illustrator')">
+                <div class="anim-float-2 relative" style="--rot: -11deg;">
+                    <svg class="absolute -inset-7 w-36 h-36 sm:w-44 sm:h-44 glow-orange pointer-events-none" viewBox="0 0 200 200" fill="none">
+                        <path d="M25 85 C 5 145, 145 180, 185 115" stroke="url(#orangeSwirl)" stroke-width="9" stroke-linecap="round"/>
+                        <path d="M40 130 C 80 160, 150 150, 175 105" stroke="#fde047" stroke-width="2.5" stroke-linecap="round"/>
+                        <defs>
+                            <linearGradient id="orangeSwirl" x1="25" y1="85" x2="185" y2="115" gradientUnits="userSpaceOnUse">
+                                <stop offset="0%" stop-color="#ff9a00"/>
+                                <stop offset="60%" stop-color="#ff4d00"/>
+                                <stop offset="100%" stop-color="transparent"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <div class="app-tile relative w-20 h-20 sm:w-24 sm:h-24 rounded-[22px] sm:rounded-[26px] bg-gradient-to-br from-[#330000] to-[#1a0500] border-2 border-[#ff9a00]/60 flex items-center justify-center">
+                        <span class="font-sans font-bold text-3xl sm:text-4xl text-[#ff9a00] tracking-tight">Ai</span>
+                    </div>
+                    <span class="opacity-0 group-hover:opacity-100 transition-opacity absolute -bottom-7 left-1/2 -translate-x-1/2 text-[11px] font-display bg-black/80 px-2.5 py-0.5 rounded-full border border-orange-400/40 whitespace-nowrap">Adobe Illustrator</span>
+                </div>
+            </div>
+
+            <!-- =================================================================
+                 CENTERPIECE: B&W PORTRAIT + LAYERED "Fortfolio" TYPOGRAPHY
+            ================================================================== -->
             
-            <div class="flex flex-col md:flex-row items-center justify-center gap-6">
-                <!-- Email Button -->
-                <a href="mailto:singurahsanjaya@gmail.com" class="w-full md:w-auto bg-white text-black hover:bg-gray-200 px-8 py-4 rounded-full font-bold flex items-center justify-center gap-3 transition-colors uppercase tracking-wider">
-                    <i class="ph-bold ph-envelope-simple text-xl"></i>
-                    singurahsanjaya@gmail.com
+            <!-- Back Layer Giant Solid Typography -->
+            <div class="parallax-layer absolute inset-x-0 top-[54%] sm:top-[53%] -translate-y-1/2 z-10 text-center pointer-events-none" data-depth="0.018">
+                <h1 id="hero-title-back" class="hero-word-back font-display font-black text-[58px] sm:text-[102px] md:text-[134px] lg:text-[156px] text-white leading-none select-none">
+                    Fortfolio
+                </h1>
+            </div>
+
+            <!-- Subject Monochrome Portrait -->
+            <div class="parallax-layer relative z-20 h-full flex items-end justify-center pointer-events-none" data-depth="0.025">
+                <div class="relative w-[310px] sm:w-[420px] md:w-[490px] h-[520px] sm:h-[620px] md:h-[680px] flex items-end justify-center">
+                    <img 
+                        id="hero-portrait-img"
+                        src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=85" 
+                        alt="Creative Designer Monochrome Portrait"
+                        onerror="this.src='https://placehold.co/600x800/18181b/ffffff?text=Creative+Portrait'"
+                        class="w-full h-full object-cover object-top grayscale contrast-125 brightness-95 drop-shadow-[0_25px_45px_rgba(0,0,0,0.9)]"
+                        style="-webkit-mask-image: linear-gradient(to bottom, black 72%, transparent 100%); mask-image: linear-gradient(to bottom, black 72%, transparent 100%); border-radius: 36px 36px 0 0;"
+                    />
+                </div>
+            </div>
+
+            <!-- Front Layer Hollow/Wireframe Typography Overlay -->
+            <div class="parallax-layer absolute inset-x-0 top-[54%] sm:top-[53%] -translate-y-1/2 z-30 text-center pointer-events-none" data-depth="0.032">
+                <span id="hero-title-front" aria-hidden="true" class="hero-word-front font-display font-black text-[58px] sm:text-[102px] md:text-[134px] lg:text-[156px] leading-none select-none block">
+                    Fortfolio
+                </span>
+            </div>
+
+            <!-- Bottom Controls: Customize Portrait / Explore CTA -->
+            <div class="absolute bottom-4 left-1/2 -translate-x-1/2 z-40 flex flex-wrap items-center justify-center gap-3">
+                <a href="#project" class="px-5 py-2.5 rounded-full bg-white text-black font-display font-bold text-xs tracking-wider hover:bg-blue-500 hover:text-white transition-all shadow-lg flex items-center gap-2">
+                    <span>Explore Works</span>
+                    <span>↓</span>
                 </a>
-                <!-- WA Button -->
-                <a href="https://wa.me/6285737116564" target="_blank" class="w-full md:w-auto bg-[#25D366] hover:bg-[#20b858] text-white px-8 py-4 rounded-full font-bold flex items-center justify-center gap-3 transition-colors shadow-[0_0_20px_rgba(37,211,102,0.4)] uppercase tracking-wider">
-                    <i class="ph-bold ph-whatsapp-logo text-xl"></i>
-                    WhatsApp Me
-                </a>
+                <button onclick="toggleCustomModal(true)" class="px-4 py-2.5 rounded-full glass-panel text-white/90 hover:text-white text-xs font-medium border border-white/20 hover:border-blue-400 transition-all flex items-center gap-2">
+                    <span>✨</span>
+                    <span>Ganti Foto / Judul</span>
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         PROFILE & ABOUT ME SECTION
+    ====================================================================== -->
+    <section id="profile" class="max-w-6xl mx-auto px-4 sm:px-6 py-20">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            
+            <!-- Profile Card -->
+            <div class="lg:col-span-5 glass-panel rounded-3xl p-7 sm:p-8 flex flex-col justify-between relative overflow-hidden group">
+                <div class="absolute -top-20 -right-20 w-48 h-48 bg-blue-500/20 rounded-full blur-3xl group-hover:bg-blue-500/30 transition-all"></div>
+                
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/15 border border-blue-400/30 text-blue-300 text-xs font-display mb-5">
+                        <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+                        AVAILABLE FOR CREATIVE WORK
+                    </div>
+                    <h2 class="font-display text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">
+                        Raka Pratama
+                    </h2>
+                    <p class="text-white/70 text-sm sm:text-base leading-relaxed mb-6">
+                        Visual Designer, UI/UX Crafter, & Motion Editor. Menggabungkan estetika kontras tinggi, tipografi futuristik, dan elemen 3D interaktif menjadi pengalaman digital yang berkesan.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-3 gap-3 pt-6 border-t border-white/10 text-center">
+                    <div class="bg-white/5 rounded-2xl p-3">
+                        <div class="font-display text-xl sm:text-2xl font-bold text-white">4+</div>
+                        <div class="text-[11px] text-white/60 mt-0.5">Tahun Eksplorasi</div>
+                    </div>
+                    <div class="bg-white/5 rounded-2xl p-3">
+                        <div class="font-display text-xl sm:text-2xl font-bold text-blue-400">65+</div>
+                        <div class="text-[11px] text-white/60 mt-0.5">Proyek Selesai</div>
+                    </div>
+                    <div class="bg-white/5 rounded-2xl p-3">
+                        <div class="font-display text-xl sm:text-2xl font-bold text-orange-400">100%</div>
+                        <div class="text-[11px] text-white/60 mt-0.5">Craft & Detail</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- About Me & Software Arsenal -->
+            <div id="about" class="lg:col-span-7 glass-panel rounded-3xl p-7 sm:p-8 flex flex-col justify-between relative overflow-hidden">
+                <div class="absolute -bottom-24 -left-24 w-56 h-56 bg-orange-500/15 rounded-full blur-3xl"></div>
+
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-display text-xl sm:text-2xl font-bold">About Me & Creative Stack</h3>
+                        <span class="text-xs text-white/50 font-display">CLICK TOOL FOR DETAILS</span>
+                    </div>
+                    <p class="text-white/75 text-sm sm:text-base leading-relaxed mb-6">
+                        Saya percaya desain terbaik lahir ketika teknik presisi bertemu dengan keberanian visual. Dari merancang sistem antarmuka di <strong class="text-white">Figma</strong>, manipulasi foto dramatis di <strong class="text-sky-400">Photoshop</strong>, ilustrasi vektor di <strong class="text-orange-400">Illustrator</strong>, hingga ritme visual dinamis di <strong class="text-white">CapCut</strong>.
+                    </p>
+                </div>
+
+                <!-- Interactive Software Stack Pills -->
+                <div class="space-y-3.5">
+                    <div onclick="openToolModal('figma')" class="cursor-pointer bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl p-3.5 transition-all">
+                        <div class="flex items-center justify-between text-sm mb-1.5">
+                            <span class="font-semibold flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span> Figma — UI/UX & Interactive Prototyping
+                            </span>
+                            <span class="font-display text-xs text-blue-300">96%</span>
+                        </div>
+                        <div class="w-full h-2 bg-black/50 rounded-full overflow-hidden">
+                            <div class="h-full bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full" style="width: 96%"></div>
+                        </div>
+                    </div>
+
+                    <div onclick="openToolModal('photoshop')" class="cursor-pointer bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl p-3.5 transition-all">
+                        <div class="flex items-center justify-between text-sm mb-1.5">
+                            <span class="font-semibold flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-sky-400"></span> Adobe Photoshop & Illustrator — Key Visual & Vector
+                            </span>
+                            <span class="font-display text-xs text-sky-300">92%</span>
+                        </div>
+                        <div class="w-full h-2 bg-black/50 rounded-full overflow-hidden">
+                            <div class="h-full bg-gradient-to-r from-sky-500 to-indigo-400 rounded-full" style="width: 92%"></div>
+                        </div>
+                    </div>
+
+                    <div onclick="openToolModal('capcut')" class="cursor-pointer bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl p-3.5 transition-all">
+                        <div class="flex items-center justify-between text-sm mb-1.5">
+                            <span class="font-semibold flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-orange-400"></span> CapCut & Clip Studio — Motion Edit & Digital Ink
+                            </span>
+                            <span class="font-display text-xs text-orange-300">90%</span>
+                        </div>
+                        <div class="w-full h-2 bg-black/50 rounded-full overflow-hidden">
+                            <div class="h-full bg-gradient-to-r from-orange-500 to-amber-400 rounded-full" style="width: 90%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         PROJECT SHOWCASE SECTION
+    ====================================================================== -->
+    <section id="project" class="max-w-6xl mx-auto px-4 sm:px-6 py-20">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+            <div>
+                <span class="text-xs font-display tracking-widest text-blue-400 uppercase">Selected Works</span>
+                <h2 class="font-display text-3xl sm:text-4xl font-extrabold mt-1">Featured Projects</h2>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap gap-2" id="project-filters">
+                <button data-filter="all" class="filter-btn active px-4 py-2 rounded-full text-xs font-display bg-white text-black font-bold transition-all">
+                    All Works
+                </button>
+                <button data-filter="figma" class="filter-btn px-4 py-2 rounded-full text-xs font-display glass-panel text-white/80 hover:text-white transition-all">
+                    Figma UI/UX
+                </button>
+                <button data-filter="adobe" class="filter-btn px-4 py-2 rounded-full text-xs font-display glass-panel text-white/80 hover:text-white transition-all">
+                    Ps & Ai Art
+                </button>
+                <button data-filter="motion" class="filter-btn px-4 py-2 rounded-full text-xs font-display glass-panel text-white/80 hover:text-white transition-all">
+                    CapCut & Ink
+                </button>
+            </div>
+        </div>
+
+        <!-- Projects Grid -->
+        <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </section>
+
+    <!-- =====================================================================
+         SOCIAL GALLERY SECTION
+    ====================================================================== -->
+    <section id="gallery" class="max-w-6xl mx-auto px-4 sm:px-6 py-20">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <span class="text-xs font-display tracking-widest text-orange-400 uppercase">Visual Playground</span>
+            <h2 class="font-display text-3xl sm:text-4xl font-extrabold mt-1">Social Gallery</h2>
+            <p class="text-white/65 text-sm mt-2">Eksplorasi poster eksperimental, komposisi monokrom, dan potongan proses kreatif harian.</p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div onclick="openLightbox('Cyber Crystal Poster', 'Eksperimen lighting biru neon & tipografi Futuristik di Photoshop.', 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80')" class="cursor-pointer group relative rounded-2xl overflow-hidden aspect-[4/5] glass-panel">
+                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80" alt="Abstract 3D Blue" onerror="this.src='https://placehold.co/400x500/18181b/38bdf8?text=Crystal+Art'" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
+                    <span class="text-xs font-display text-blue-400">Photoshop</span>
+                    <p class="text-sm font-bold">Cyber Crystal Poster</p>
+                </div>
+            </div>
+
+            <div onclick="openLightbox('Monochrome Street Frame', 'Studi kontras hitam-putih untuk identitas visual.', 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80')" class="cursor-pointer group relative rounded-2xl overflow-hidden aspect-[4/5] glass-panel">
+                <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80" alt="Monochrome Portrait" onerror="this.src='https://placehold.co/400x500/18181b/ffffff?text=Monochrome'" class="w-full h-full object-cover grayscale contrast-125 group-hover:scale-110 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
+                    <span class="text-xs font-display text-white/70">Photography</span>
+                    <p class="text-sm font-bold">Monochrome Contrast</p>
+                </div>
+            </div>
+
+            <div onclick="openLightbox('Solar Flare Vector', 'Ilustrasi cincin energi oranye menggunakan Adobe Illustrator.', 'https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?auto=format&fit=crop&w=800&q=80')" class="cursor-pointer group relative rounded-2xl overflow-hidden aspect-[4/5] glass-panel">
+                <img src="https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?auto=format&fit=crop&w=600&q=80" alt="Orange Neon Swirl" onerror="this.src='https://placehold.co/400x500/18181b/ff6a00?text=Solar+Vector'" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
+                    <span class="text-xs font-display text-orange-400">Illustrator</span>
+                    <p class="text-sm font-bold">Solar Flare Vector</p>
+                </div>
+            </div>
+
+            <div onclick="openLightbox('Dark UI Design System', 'Komponen glassmorphism dan dark mode di Figma.', 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80')" class="cursor-pointer group relative rounded-2xl overflow-hidden aspect-[4/5] glass-panel">
+                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80" alt="Creative Setup" onerror="this.src='https://placehold.co/400x500/18181b/a855f7?text=UI+System'" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
+                    <span class="text-xs font-display text-emerald-400">Figma</span>
+                    <p class="text-sm font-bold">Dark UI System</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- 7. Footer -->
-    <footer class="bg-black py-8 border-t border-white/10">
-        <div class="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-4">
-            <p class="text-gray-500 text-sm font-medium">
-                &copy; 2026 Ngurah Sanjaya. All rights reserved.
-            </p>
-            <div class="flex items-center gap-6 text-gray-500">
-                <a href="#" class="hover:text-brandNeon transition-colors flex items-center gap-2 text-sm font-bold uppercase">
-                    <i class="ph-fill ph-instagram-logo text-xl"></i> Instagram
-                </a>
-                <a href="#" class="hover:text-brandNeon transition-colors flex items-center gap-2 text-sm font-bold uppercase">
-                    <i class="ph-fill ph-behance-logo text-xl"></i> Behance
-                </a>
+    <!-- =====================================================================
+         CONTACT SECTION
+    ====================================================================== -->
+    <section id="contact" class="max-w-4xl mx-auto px-4 sm:px-6 pt-12 pb-28">
+        <div class="glass-panel rounded-3xl p-8 sm:p-12 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-blue-500/15 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute bottom-0 left-0 w-64 h-64 bg-orange-500/15 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 relative z-10">
+                <div>
+                    <span class="text-xs font-display tracking-widest text-blue-400 uppercase">Let's Collaborate</span>
+                    <h2 class="font-display text-3xl font-extrabold mt-1 mb-4">Start a Project</h2>
+                    <p class="text-white/70 text-sm leading-relaxed mb-6">
+                        Punya ide visual, desain aplikasi, atau kebutuhan editing kreatif? Kirim pesan langsung atau salin alamat email di bawah ini.
+                    </p>
+
+                    <div class="space-y-3">
+                        <button onclick="copyEmail()" class="w-full flex items-center justify-between px-4 py-3 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/15 transition-all text-left">
+                            <div>
+                                <div class="text-[11px] text-white/50">Direct Email (Klik untuk salin)</div>
+                                <div class="text-sm font-semibold text-white">hello@fortfolio.studio</div>
+                            </div>
+                            <span class="text-xs font-display px-2.5 py-1 rounded-lg bg-blue-500/20 text-blue-300">COPY</span>
+                        </button>
+
+                        <div class="flex gap-3 pt-2">
+                            <a href="#home" onclick="showToast('Membuka profil Behance...')" class="flex-1 py-2.5 rounded-xl bg-white/5 hover:bg-white/15 text-center text-xs font-display border border-white/10 transition-all">Behance</a>
+                            <a href="#home" onclick="showToast('Membuka profil Dribbble...')" class="flex-1 py-2.5 rounded-xl bg-white/5 hover:bg-white/15 text-center text-xs font-display border border-white/10 transition-all">Dribbble</a>
+                            <a href="#home" onclick="showToast('Membuka Instagram...')" class="flex-1 py-2.5 rounded-xl bg-white/5 hover:bg-white/15 text-center text-xs font-display border border-white/10 transition-all">Instagram</a>
+                        </div>
+                    </div>
+                </div>
+
+                <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs text-white/70 mb-1.5">Nama Anda</label>
+                        <input type="text" required placeholder="Contoh: Dimas Saputra" class="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/15 text-sm text-white placeholder-white/30 focus:outline-none focus:border-blue-400">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-white/70 mb-1.5">Email</label>
+                        <input type="email" required placeholder="dimas@email.com" class="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/15 text-sm text-white placeholder-white/30 focus:outline-none focus:border-blue-400">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-white/70 mb-1.5">Detail Proyek</label>
+                        <textarea rows="3" required placeholder="Ceritakan konsep desain yang Anda inginkan..." class="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/15 text-sm text-white placeholder-white/30 focus:outline-none focus:border-blue-400"></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-blue-600 to-sky-500 hover:from-blue-500 hover:to-sky-400 text-white font-display font-bold text-xs tracking-wider shadow-lg shadow-blue-500/25 transition-all">
+                        KIRIM PESAN SEKARANG →
+                    </button>
+                </form>
             </div>
         </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 py-8 text-center text-xs text-white/50 font-display">
+        © 2026 FORTFOLIO STUDIO — CRAFTED WITH INTERACTIVE 3D PARALLAX
     </footer>
 
-    <!-- 8. Interactive Project Modal -->
-    <div id="projectModal" class="fixed inset-0 z-[100] flex items-center justify-center opacity-0 invisible bg-black/90 backdrop-blur-lg px-4 md:px-12 pt-16 md:pt-0">
-        
-        <!-- Modal Content Container -->
-        <div id="modalContent" class="bg-cardBg border border-white/10 rounded-2xl w-full max-w-5xl max-h-[85vh] overflow-y-auto flex flex-col md:flex-row shadow-[0_0_60px_rgba(255,0,79,0.2)] transform scale-95 relative hide-scrollbar">
-            
-            <!-- Close Button -->
-            <button onclick="closeModal()" class="absolute top-4 right-4 z-20 w-10 h-10 bg-black/60 hover:bg-brandNeon rounded-full flex items-center justify-center text-white transition-colors border border-white/20">
-                <i class="ph-bold ph-x text-lg"></i>
-            </button>
+    <!-- =====================================================================
+         INTERACTIVE MODALS
+    ====================================================================== -->
+    
+    <!-- 1. Tool / Project Inspector Modal -->
+    <div id="info-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/75 backdrop-blur-sm">
+        <div class="glass-panel max-w-md w-full rounded-3xl p-6 sm:p-7 relative border border-white/20 transform transition-all">
+            <button onclick="closeInfoModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-sm">✕</button>
+            <div id="modal-badge" class="inline-block px-3 py-1 rounded-full text-xs font-display mb-3 bg-blue-500/20 text-blue-300">TOOL</div>
+            <h3 id="modal-title" class="font-display text-2xl font-bold mb-2">Title</h3>
+            <p id="modal-desc" class="text-sm text-white/75 leading-relaxed mb-5">Description</p>
+            <div id="modal-tags" class="flex flex-wrap gap-2 mb-6"></div>
+            <button onclick="closeInfoModal()" class="w-full py-2.5 rounded-xl bg-white text-black font-display font-bold text-xs">Tutup</button>
+        </div>
+    </div>
 
-            <!-- Left: Image/Video Area -->
-            <div class="w-full md:w-1/2 h-64 md:h-auto relative bg-black">
-                <img id="modalImg" src="" alt="Project Cover" class="w-full h-full object-cover">
-                <!-- Overlay Gradients -->
-                <div class="absolute inset-0 bg-gradient-to-t from-cardBg via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:to-cardBg"></div>
-                <!-- Play Button Center -->
-                <div class="absolute inset-0 flex items-center justify-center">
-                    <div class="w-16 h-16 border-2 border-white/50 rounded-full flex items-center justify-center bg-black/30 backdrop-blur-sm hover:scale-110 transition-transform cursor-pointer hover:border-brandNeon">
-                        <i class="ph-fill ph-play text-2xl text-white ml-1"></i>
-                    </div>
+    <!-- 2. Hero Customizer Modal -->
+    <div id="custom-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/75 backdrop-blur-sm">
+        <div class="glass-panel max-w-md w-full rounded-3xl p-6 sm:p-7 relative border border-white/20">
+            <button onclick="toggleCustomModal(false)" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-sm">✕</button>
+            <h3 class="font-display text-xl font-bold mb-1">Kustomisasi Hero Stage</h3>
+            <p class="text-xs text-white/60 mb-5">Unggah foto cutout (PNG transparan atau foto biasa) untuk otomatis diubah ke gaya monokrom dramatis.</p>
+            
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs text-white/80 mb-1.5">Teks Utama Hero</label>
+                    <input id="custom-title-input" type="text" value="Fortfolio" maxlength="14" oninput="updateHeroTitle(this.value)" class="w-full px-4 py-2.5 rounded-xl bg-black/50 border border-white/15 text-sm font-display text-white focus:outline-none focus:border-blue-400">
+                </div>
+                <div>
+                    <label class="block text-xs text-white/80 mb-1.5">Unggah Foto Potret Anda</label>
+                    <input type="file" accept="image/*" onchange="handlePortraitUpload(event)" class="w-full text-xs text-white/70 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-display file:bg-blue-600 file:text-white hover:file:bg-blue-500 cursor-pointer">
                 </div>
             </div>
 
-            <!-- Right: Details Area -->
-            <div class="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center bg-cardBg">
-                <div class="flex items-center gap-3 mb-4">
-                    <span id="modalCategory" class="text-brandNeon text-xs font-bold tracking-widest uppercase border border-brandNeon/30 px-3 py-1 rounded-sm bg-brandNeon/10">Kategori</span>
-                    <span class="text-gray-500 text-sm font-medium">|</span>
-                    <span id="modalYear" class="text-gray-400 text-sm font-medium border border-gray-600 px-2 py-0.5 rounded">2026</span>
-                </div>
-                
-                <h2 id="modalTitle" class="text-3xl md:text-5xl font-display font-bold text-white mb-6 uppercase leading-tight skew-title origin-left">
-                    Judul Proyek
-                </h2>
-                
-                <p id="modalDesc" class="text-gray-300 text-base leading-relaxed mb-8 font-light">
-                    Deskripsi detail mengenai proyek ini akan muncul di sini.
-                </p>
+            <button onclick="toggleCustomModal(false)" class="mt-6 w-full py-2.5 rounded-xl bg-white text-black font-display font-bold text-xs">Selesai</button>
+        </div>
+    </div>
 
-                <!-- Tools/Tags (Static for design purposes) -->
-                <div class="mb-8">
-                    <h4 class="text-white font-bold text-sm mb-3">Tools Used:</h4>
-                    <div class="flex gap-2 flex-wrap">
-                        <span class="bg-white/5 border border-white/10 px-3 py-1 rounded text-xs text-gray-300">Adobe Illustrator</span>
-                        <span class="bg-white/5 border border-white/10 px-3 py-1 rounded text-xs text-gray-300">Figma</span>
-                        <span class="bg-white/5 border border-white/10 px-3 py-1 rounded text-xs text-gray-300">Photoshop</span>
-                    </div>
+    <!-- 3. Gallery Lightbox Modal -->
+    <div id="lightbox-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/85 backdrop-blur-md" onclick="closeLightbox()">
+        <div class="max-w-xl w-full glass-panel rounded-3xl overflow-hidden border border-white/20" onclick="event.stopPropagation()">
+            <img id="lightbox-img" src="" alt="Preview" class="w-full max-h-[65vh] object-cover">
+            <div class="p-5 flex items-center justify-between gap-4">
+                <div>
+                    <h4 id="lightbox-title" class="font-display font-bold text-lg">Title</h4>
+                    <p id="lightbox-desc" class="text-xs text-white/70 mt-0.5">Description</p>
                 </div>
-
-                <!-- Modal Actions -->
-                <div class="mt-auto flex items-center gap-4">
-                    <button class="flex-1 bg-white hover:bg-gray-200 text-black font-bold py-3 md:py-4 rounded text-center transition-colors flex justify-center items-center gap-2 uppercase tracking-wide text-sm">
-                        <i class="ph-bold ph-eye text-lg"></i> View Full Case
-                    </button>
-                    <button class="w-12 h-12 md:w-14 md:h-14 rounded border border-white/20 flex items-center justify-center hover:bg-white/10 transition-colors text-white">
-                        <i class="ph-bold ph-plus text-xl"></i>
-                    </button>
-                    <button class="w-12 h-12 md:w-14 md:h-14 rounded border border-white/20 flex items-center justify-center hover:bg-white/10 transition-colors text-white">
-                        <i class="ph-bold ph-share-network text-xl"></i>
-                    </button>
-                </div>
+                <button onclick="closeLightbox()" class="px-4 py-2 rounded-xl bg-white text-black font-display font-bold text-xs shrink-0">Tutup</button>
             </div>
         </div>
     </div>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- =====================================================================
+         JAVASCRIPT: 3D PARALLAX ENGINE, FILTERING & INTERACTIVITY
+    ====================================================================== -->
     <script>
-        // 1. Navbar Scroll Effect
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('bg-black', 'border-b', 'border-white/10', 'py-4');
-                navbar.classList.remove('bg-gradient-to-b', 'from-black/90', 'to-transparent', 'pt-6', 'pb-6');
-            } else {
-                navbar.classList.remove('bg-black', 'border-b', 'border-white/10', 'py-4');
-                navbar.classList.add('bg-gradient-to-b', 'from-black/90', 'to-transparent', 'pt-6', 'pb-6');
+        // 1. 3D Mouse & Touch Parallax Engine for Hero Stage
+        const heroStage = document.getElementById('hero-stage');
+        const parallaxLayers = document.querySelectorAll('.parallax-layer');
+
+        function applyParallax(clientX, clientY) {
+            const rect = heroStage.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            const deltaX = clientX - centerX;
+            const deltaY = clientY - centerY;
+
+            parallaxLayers.forEach(layer => {
+                const depth = parseFloat(layer.getAttribute('data-depth')) || 0.03;
+                const moveX = -deltaX * depth;
+                const moveY = -deltaY * depth;
+                layer.style.transform = `translate3d(${moveX}px, ${moveY}px, 0)`;
+            });
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            if (window.scrollY < window.innerHeight) {
+                applyParallax(e.clientX, e.clientY);
             }
         });
 
-        // 2. Initialize Swiper for Experience (Horizontal List)
-        const expSwiper = new Swiper('.exp-swiper', {
-            slidesPerView: 'auto',
-            spaceBetween: 24,
-            freeMode: true,
-            grabCursor: true,
-            navigation: {
-                nextEl: '.exp-next',
-                prevEl: '.exp-prev',
-            },
-        });
+        document.addEventListener('touchmove', (e) => {
+            if (e.touches.length > 0 && window.scrollY < window.innerHeight) {
+                applyParallax(e.touches[0].clientX, e.touches[0].clientY);
+            }
+        }, { passive: true });
 
-        // 3. Initialize Swiper for Projects (3D Coverflow)
-        const projectsSwiper = new Swiper('.projects-swiper', {
-            effect: 'coverflow',
-            grabCursor: true,
-            centeredSlides: true,
-            slidesPerView: 'auto',
-            initialSlide: 1, // Start on middle slide
-            coverflowEffect: {
-                rotate: 0,      // No rotation, flat facing forward
-                stretch: 0,     // Space between
-                depth: 300,     // Depth effect
-                modifier: 1,    
-                slideShadows: true,
+        // 2. Software Tool Data & Modal Trigger
+        const toolDetails = {
+            figma: {
+                badge: 'UI/UX & PROTOTYPING',
+                title: 'Figma Design Systems',
+                desc: 'Merancang wireframe interaktif, komponen auto-layout berskala besar, dan prototipe aplikasi web/mobile dengan micro-interactions presisi.',
+                tags: ['Auto Layout', 'Design Tokens', 'Interactive Prototype', 'Wireframing']
             },
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
+            photoshop: {
+                badge: 'PHOTO MANIPULATION & KEY VISUAL',
+                title: 'Adobe Photoshop',
+                desc: 'Komposisi foto dramatis, color grading sinematik, efek pencahayaan neon, dan retouching kontras tinggi untuk poster maupun hero banner.',
+                tags: ['Compositing', 'Color Grading', 'Neon Glow FX', 'Masking']
             },
-        });
-
-        // 4. Modal Database
-        const projectData = {
-            'hire': {
-                title: 'Let\'s Create Something Epic',
-                category: 'Collaboration',
-                year: '2026',
-                img: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1000&auto=format&fit=crop',
-                desc: 'Saya siap membantu mewujudkan visi Anda. Baik itu merancang antarmuka aplikasi yang intuitif (UI/UX), membuat identitas merek yang kuat (Branding), atau menciptakan ilustrasi digital yang memukau. Hubungi saya melalui tombol WhatsApp atau Email di halaman ini.'
+            illustrator: {
+                badge: 'VECTOR & BRAND IDENTITY',
+                title: 'Adobe Illustrator',
+                desc: 'Pembuatan logo geometris, tipografi kustom, ikonografi 3D vektor, dan ilustrasi tajam dengan kurva bezier yang presisi.',
+                tags: ['Logo Design', 'Custom Typography', 'Bezier Precision', 'Vector Art']
             },
-            'kadazen': {
-                title: 'Brand KADAZEN',
-                category: 'Branding Project',
-                year: '2025',
-                img: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=1000&auto=format&fit=crop',
-                desc: 'Pengembangan identitas visual menyeluruh untuk brand KADAZEN. Proyek ini mencakup perancangan logo, tipografi, palet warna, hingga pedoman visual (brand guidelines) untuk memastikan konsistensi merek di berbagai platform.'
+            capcut: {
+                badge: 'MOTION & VIDEO EDITING',
+                title: 'CapCut Creative Suite',
+                desc: 'Penyuntingan video ritmis berbasis audio waveform, transisi dinamis, keyframe animation, dan visual reels berenergi tinggi.',
+                tags: ['Beat Sync', 'Keyframe Motion', 'Color LUTs', 'Sound Design']
             },
-            'lahilote': {
-                title: 'Animasi Lahilote',
-                category: 'Animation & Story',
-                year: '2026',
-                img: 'https://images.unsplash.com/photo-1618519764620-7403abdbdf9c?q=80&w=1000&auto=format&fit=crop',
-                desc: 'Proyek animasi yang mengangkat cerita rakyat lokal dengan sentuhan gaya visual modern. Bertanggung jawab dalam pembuatan storyboard, desain karakter, dan arahan visual sinematik untuk menciptakan pengalaman menonton yang imersif.'
-            },
-            'fatamorgana': {
-                title: 'Fatamorgana di Tengah Lara',
-                category: 'Digital Illustration',
-                year: '2024',
-                img: 'https://images.unsplash.com/photo-1558865869-c93f6f8482af?q=80&w=1000&auto=format&fit=crop',
-                desc: 'Sebuah eksplorasi ilustrasi digital yang mendalam tentang emosi manusia. Menggunakan permainan cahaya dramatis dan warna kontras untuk menggambarkan kebingungan dan harapan di tengah situasi yang sulit.'
+            csp: {
+                badge: 'DIGITAL INK & ILLUSTRATION',
+                title: 'Clip Studio Paint',
+                desc: 'Sketsa ekspresif, sapuan tinta dinamis, dan ilustrasi karakter bergaya komik/editorial dengan sensitivitas stylus tinggi.',
+                tags: ['Dynamic Inking', 'Character Art', 'Brush Engine', 'Lineart']
             }
         };
 
-        // 5. Modal Control Logic
-        const modal = document.getElementById('projectModal');
-        const modalContent = document.getElementById('modalContent');
-        const body = document.body;
-
-        function openModal(id) {
-            const data = projectData[id];
+        function openToolModal(key) {
+            const data = toolDetails[key];
             if (!data) return;
-
-            // Inject Data
-            document.getElementById('modalTitle').innerText = data.title;
-            document.getElementById('modalCategory').innerText = data.category;
-            document.getElementById('modalYear').innerText = data.year;
-            document.getElementById('modalDesc').innerText = data.desc;
-            document.getElementById('modalImg').src = data.img;
-
-            // Show UI
-            modal.classList.remove('invisible', 'opacity-0');
-            modalContent.classList.remove('scale-95');
-            modalContent.classList.add('scale-100');
-            body.classList.add('modal-open');
-        }
-
-        function closeModal() {
-            // Hide UI
-            modal.classList.add('opacity-0');
-            modalContent.classList.remove('scale-100');
-            modalContent.classList.add('scale-95');
-            body.classList.remove('modal-open');
+            document.getElementById('modal-badge').textContent = data.badge;
+            document.getElementById('modal-title').textContent = data.title;
+            document.getElementById('modal-desc').textContent = data.desc;
             
-            setTimeout(() => {
-                modal.classList.add('invisible');
-            }, 300); // Matches transition duration
+            const tagsContainer = document.getElementById('modal-tags');
+            tagsContainer.innerHTML = data.tags.map(t => 
+                `<span class="px-3 py-1 rounded-full bg-white/10 text-xs text-white/90 border border-white/10">${t}</span>`
+            ).join('');
+
+            const modal = document.getElementById('info-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
         }
 
-        // Close on background click
-        modal.addEventListener('click', function(e) {
-            if (e.target === modal) closeModal();
-        });
-        
-        // Close on Escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && !modal.classList.contains('invisible')) {
-                closeModal();
+        function closeInfoModal() {
+            const modal = document.getElementById('info-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // 3. Projects Data & Filter Logic
+        const projectsData = [
+            {
+                title: 'Neon Nexus — Fintech App',
+                category: 'figma',
+                toolLabel: 'Figma UI/UX',
+                accent: 'text-emerald-400',
+                image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80',
+                desc: 'Redesign dashboard keuangan dark-mode dengan visualisasi data real-time dan sistem desain modular.'
+            },
+            {
+                title: 'Cyber Drift Key Visual',
+                category: 'adobe',
+                toolLabel: 'Photoshop & Ai',
+                accent: 'text-sky-400',
+                image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=800&q=80',
+                desc: 'Key visual acara musik elektronik memadukan manipulasi potret monokrom dan kristal energi biru.'
+            },
+            {
+                title: 'Kinetix Showreel 2026',
+                category: 'motion',
+                toolLabel: 'CapCut Pro',
+                accent: 'text-orange-400',
+                image: 'https://images.unsplash.com/photo-1536240478700-b869070f9279?auto=format&fit=crop&w=800&q=80',
+                desc: 'Video promosi berdurasi 60 detik dengan sinkronisasi beat presisi, kinetic typography, dan filmstrip overlay.'
+            },
+            {
+                title: 'Ignite Brand Identity',
+                category: 'adobe',
+                toolLabel: 'Illustrator',
+                accent: 'text-orange-400',
+                image: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=800&q=80',
+                desc: 'Identitas visual lengkap, monogram geometris, dan palet warna kontras untuk studio kreatif.'
+            },
+            {
+                title: 'Aether Spatial Web UI',
+                category: 'figma',
+                toolLabel: 'Figma Interactive',
+                accent: 'text-blue-400',
+                image: 'https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=800&q=80',
+                desc: 'Eksplorasi antarmuka berbasis kedalaman 3D dan kartu glassmorphism responsif.'
+            },
+            {
+                title: 'Shadow Ink Series',
+                category: 'motion',
+                toolLabel: 'Clip Studio Paint',
+                accent: 'text-white',
+                image: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=800&q=80',
+                desc: 'Seri ilustrasi hitam-putih bertekstur kuas tinta ekspresif untuk sampul album independen.'
             }
+        ];
+
+        function renderProjects(filter = 'all') {
+            const grid = document.getElementById('projects-grid');
+            const filtered = filter === 'all' ? projectsData : projectsData.filter(p => p.category === filter);
+
+            grid.innerHTML = filtered.map((proj) => `
+                <article class="glass-panel rounded-3xl overflow-hidden group border border-white/10 hover:border-white/30 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-52 overflow-hidden bg-zinc-900">
+                            <img src="${proj.image}" alt="${proj.title}" onerror="this.src='https://placehold.co/600x400/18181b/ffffff?text=${encodeURIComponent(proj.title)}'" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-black/75 backdrop-blur-md text-[11px] font-display ${proj.accent} border border-white/10">
+                                ${proj.toolLabel}
+                            </span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-display text-lg font-bold mb-2 group-hover:text-blue-400 transition-colors">${proj.title}</h3>
+                            <p class="text-xs sm:text-sm text-white/70 leading-relaxed">${proj.desc}</p>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-6 pt-2">
+                        <button onclick="openLightbox('${proj.title.replace(/'/g, "\\'")}', '${proj.desc.replace(/'/g, "\\'")}', '${proj.image}')" class="text-xs font-display font-bold text-white/90 hover:text-blue-400 flex items-center gap-1.5 transition-colors">
+                            <span>Inspect Case Study</span>
+                            <span>→</span>
+                        </button>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => {
+                    b.classList.remove('bg-white', 'text-black', 'font-bold');
+                    b.classList.add('glass-panel', 'text-white/80');
+                });
+                btn.classList.remove('glass-panel', 'text-white/80');
+                btn.classList.add('bg-white', 'text-black', 'font-bold');
+                renderProjects(btn.getAttribute('data-filter'));
+            });
         });
+
+        // 4. Customizer Functions
+        function toggleCustomModal(show) {
+            const modal = document.getElementById('custom-modal');
+            if (show) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            } else {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        }
+
+        function updateHeroTitle(val) {
+            const text = val.trim() || 'Fortfolio';
+            document.getElementById('hero-title-back').textContent = text;
+            document.getElementById('hero-title-front').textContent = text;
+        }
+
+        function handlePortraitUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('hero-portrait-img').src = e.target.result;
+                showToast('Foto potret berhasil diperbarui ke gaya monokrom!');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // 5. Lightbox Functions
+        function openLightbox(title, desc, imgSrc) {
+            document.getElementById('lightbox-title').textContent = title;
+            document.getElementById('lightbox-desc').textContent = desc;
+            document.getElementById('lightbox-img').src = imgSrc;
+            const modal = document.getElementById('lightbox-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeLightbox() {
+            const modal = document.getElementById('lightbox-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // 6. Clipboard & Toast Helper
+        function showToast(msg) {
+            const box = document.getElementById('toast-box');
+            document.getElementById('toast-message').textContent = msg;
+            box.classList.remove('translate-y-24', 'opacity-0');
+            setTimeout(() => {
+                box.classList.add('translate-y-24', 'opacity-0');
+            }, 3200);
+        }
+
+        function copyEmail() {
+            const tempInput = document.createElement('input');
+            tempInput.value = 'hello@fortfolio.studio';
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            try {
+                document.execCommand('copy');
+                showToast('Email hello@fortfolio.studio disalin ke clipboard!');
+            } catch (err) {
+                showToast('Gagal menyalin email.');
+            }
+            document.body.removeChild(tempInput);
+        }
+
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            e.target.reset();
+            showToast('Pesan terkirim! Terima kasih telah menghubungi.');
+        }
+
+        // 7. Active Navbar Highlight on Scroll
+        const sections = ['home', 'profile', 'about', 'project', 'gallery', 'contact'];
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 40) {
+                navbar.classList.add('bg-black/60', 'backdrop-blur-md', 'border-b', 'border-white/10');
+            } else {
+                navbar.classList.remove('bg-black/60', 'backdrop-blur-md', 'border-b', 'border-white/10');
+            }
+
+            let current = 'home';
+            sections.forEach(id => {
+                const el = document.getElementById(id);
+                if (el && window.scrollY >= el.offsetTop - 220) {
+                    current = id;
+                }
+            });
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                const indicator = link.querySelector('.nav-indicator');
+                if (link.getAttribute('data-nav') === current) {
+                    link.classList.add('text-white', 'font-bold');
+                    link.classList.remove('text-white/75');
+                    indicator.classList.remove('scale-x-0');
+                } else {
+                    link.classList.remove('text-white', 'font-bold');
+                    link.classList.add('text-white/75');
+                    indicator.classList.add('scale-x-0');
+                }
+            });
+        });
+
+        // Initial Render
+        renderProjects('all');
     </script>
 </body>
 </html>
